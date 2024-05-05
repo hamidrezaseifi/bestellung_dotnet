@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bestellung/bin/Debug
+/.vs/bestellung/v16
+/bestellung/Core/Compression
+/bestellung/obj/Debug
+/packages
+/bestellung/mongocrypt.dll
+/bestellung/libmongocrypt.so
+/bestellung/libmongocrypt.dylib
