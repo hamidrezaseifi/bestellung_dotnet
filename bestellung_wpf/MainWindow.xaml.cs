@@ -24,8 +24,13 @@ namespace bestellung_wpf
     public partial class MainWindow : Window
     {
         public MainWindowView view = new MainWindowView();
+        private GlobalValues globalValues = ((App)Application.Current).GlobalValues;
         public MainWindow()
         {
+            if (globalValues.UserList.Count == 0)
+            {
+                return;
+            }
 
             InitializeComponent();
 
@@ -63,6 +68,7 @@ namespace bestellung_wpf
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
             long i = DateTime.Now.Millisecond;
+
             BestellungItem item = new BestellungItem();
             item.id = "id-" + i;
             item.customer = "Kunde: " + i;
@@ -70,7 +76,9 @@ namespace bestellung_wpf
             item.endBetrag = 1 * 2;
             item.anzahlung = 3;
 
-            view.bestellungItemObservable.List.Add(item);
+            BestellungItemUi itemUi = new BestellungItemUi(item);
+
+            view.bestellungItemObservable.List.Add(itemUi);
         }
     }
 }

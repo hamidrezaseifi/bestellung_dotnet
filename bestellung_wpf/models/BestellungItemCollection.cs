@@ -9,6 +9,6 @@ namespace bestellung_wpf.models
 {
     public class BestellungItemCollection
     {
-        public ObservableCollection<BestellungItem> List { get; set; } = new ObservableCollection<BestellungItem>();
+        public ObservableCollection<BestellungItemUi> List { get; set; } = new ObservableCollection<BestellungItemUi>();
     }
 }

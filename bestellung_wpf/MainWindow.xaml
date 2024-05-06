@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bestellung_wpf"
         xmlns:views="clr-namespace:bestellung_wpf.views" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="1600" Closed="Window_Closed"
+        Title="MainWindow" Height="950" Width="1700" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,12 +38,13 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Width="100" Header="Ersteller" x:Name="userColumn" DisplayMemberBinding="{Binding user}" />
                     <GridViewColumn Width="120" Header="Datum" x:Name="datesColumn" DisplayMemberBinding="{Binding dates}" />
                     <GridViewColumn Width="120" Header="Kunde" x:Name="customerColumn" DisplayMemberBinding="{Binding customer}" />
                     <GridViewColumn Width="120" Header="Fahrzeug" x:Name="fahrzeugColumn" DisplayMemberBinding="{Binding fahrzeug}" />
                     <GridViewColumn Width="140" Header="Fahrgestellnummer" x:Name="fahrgestellnummerColumn" DisplayMemberBinding="{Binding fahrgestellnummer}" />
                     <GridViewColumn Width="120" Header="HSN/TSN" x:Name="hsnTsnColumn" DisplayMemberBinding="{Binding hsnTsn}" />
-                    <GridViewColumn Width="350" Header="Artikel" x:Name="articelsColumn" DisplayMemberBinding="{Binding artikel}" />
+                    <GridViewColumn Width="350" Header="Artikel" x:Name="articelsColumn" DisplayMemberBinding="{Binding articleNames}" />
                     <GridViewColumn Width="120" Header="Betrag" x:Name="betragColumn" DisplayMemberBinding="{Binding betrag}" />
                     <GridViewColumn Width="120" Header="Endbetrag" x:Name="endBetragColumn" DisplayMemberBinding="{Binding endBetrag}" />
                     <GridViewColumn Width="120" Header="Anzahlung" x:Name="anzahlungColumn" DisplayMemberBinding="{Binding anzahlung}" />

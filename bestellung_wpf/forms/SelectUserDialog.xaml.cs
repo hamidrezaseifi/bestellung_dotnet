@@ -22,6 +22,7 @@ namespace bestellung_wpf.forms
     public partial class SelectUserDialog : Window
     {
         private bool _selected = false;
+        private GlobalValues globalValues;
 
         public bool Selected { get {
                 return _selected;
@@ -30,6 +31,8 @@ namespace bestellung_wpf.forms
         public SelectUserDialog(Window owner)
         {
             InitializeComponent();
+
+            globalValues = ((App)Application.Current).GlobalValues;
 
             this.Owner = owner;
             UserMongoHelper userMongo = new UserMongoHelper();
@@ -55,6 +58,8 @@ namespace bestellung_wpf.forms
                 rowDefinition.Height = new GridLength(40);
                 grdMain.RowDefinitions.Add(rowDefinition);
 
+                this.globalValues.UserList.Add(user);
+
                 row += 1;
             }
 
@@ -74,7 +79,7 @@ namespace bestellung_wpf.forms
             Button btn = sender as Button;
 
 
-            ((App)Application.Current).GlobalValues.CurrentUser = btn.Tag as User;
+            this.globalValues.CurrentUser = btn.Tag as User;
             _selected = true;
 
             this.Close();

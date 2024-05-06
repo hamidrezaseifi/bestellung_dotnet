@@ -15,9 +15,22 @@ namespace bestellung_wpf
 
         private User _currentUser = null;
 
-        public User CurrentUser {
+        private List<User> _userList = new List<User>();
+
+        public List<User> UserList
+        {
+            get { return _userList; }
+            set
+            {
+                _userList = value;
+            }
+        }
+
+        public User CurrentUser
+        {
             get { return _currentUser; }
-            set {
+            set
+            {
                 _currentUser = value;
                 OnPropertyChanged();
             }

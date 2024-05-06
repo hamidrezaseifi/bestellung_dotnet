@@ -30,12 +30,15 @@ namespace bestellung_wpf.DataLayer
 
         public void CreateDocument(T document)
         {
-            throw new System.NotImplementedException();
+            IMongoDatabase database = GetDatabase();
+            database.GetCollection<T>(GetCollectionName()).InsertOne(document);
+           
         }
 
         public void DeleteDocuments(FilterDefinition<T> filter)
         {
-            throw new System.NotImplementedException();
+            IMongoDatabase database = GetDatabase();
+            database.GetCollection<T>(GetCollectionName()).DeleteOne(filter);
         }
 
         public List<T> GetAllDocuments()
@@ -44,14 +47,16 @@ namespace bestellung_wpf.DataLayer
             return collection.Find(x => true).ToList();
         }
 
-        public  List<T> GetFilteredDocuments(FilterDefinition<T> filter)
+        public List<T> GetFilteredDocuments(FilterDefinition<T> filter)
         {
-            throw new System.NotImplementedException();
+            IMongoDatabase database = GetDatabase();
+            return database.GetCollection<T>(GetCollectionName()).Find(filter).ToList();
         }
 
         public void UpdateDocument(FilterDefinition<T> filter, UpdateDefinition<T> document)
         {
-            throw new System.NotImplementedException();
+            IMongoDatabase database = GetDatabase();
+            database.GetCollection<T>(GetCollectionName()).UpdateOne(filter, document);
         }
     }
 }

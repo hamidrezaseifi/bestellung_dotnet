@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace bestellung_wpf.DataLayer
 {
-    public class UserMongoHelper : MongoHelper<User>
+    public class BestellungItemMongoHlper : MongoHelper<BestellungItem>
     {
         protected override string GetCollectionName()
         {
-            return "users";
+            return "bestellung";
         }
 
         protected override string GetDatabaseName()

@@ -114,6 +114,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
+    <Compile Include="models\ArticleItem.cs" />
+    <Compile Include="models\BestellungItemUi.cs" />
     <Compile Include="views\MainWindowView.cs" />
     <Page Include="forms\SelectUserDialog.xaml">
       <SubType>Designer</SubType>

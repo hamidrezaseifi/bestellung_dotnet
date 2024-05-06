@@ -10,6 +10,8 @@ namespace bestellung_wpf.models
 {
     public class BestellungItem
     {
+        private List<ArticleItem> _articles = new List<ArticleItem>();
+
         [BsonId]
         public ObjectId _id { get; set; }
 
@@ -23,7 +25,9 @@ namespace bestellung_wpf.models
 
         public DateTime rueckgabeDate{ get; set; }
 
-        public string customer{ get; set; }
+        public string customer { get; set; }
+
+        public string user { get; set; }
 
         public string fahrzeug{ get; set; }
 
@@ -39,19 +43,8 @@ namespace bestellung_wpf.models
 
         public string status{ get; set; }
 
-        public double offeneBetrag { get { return endBetrag - anzahlung;  } }
-
-        public string artikel
-        {
-            get { return "--- artikel ---"; }
-        }
-
-        public string dates
-        {
-            get { return "--- dates ---"; }
-        }
-
-
+        public List<ArticleItem> articles { get { return _articles; } set{ _articles = value; } }
+        
 
     }
 }
