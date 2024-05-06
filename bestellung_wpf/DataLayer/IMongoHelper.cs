@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace bestellung.DataLayer
+namespace bestellung_wpf.DataLayer
 {
     public interface IMongoHelper<T>
     {

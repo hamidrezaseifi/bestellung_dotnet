@@ -10,3 +10,9 @@
 /bestellung/mongocrypt.dll
 /bestellung/libmongocrypt.so
 /bestellung/libmongocrypt.dylib
+/.vs/bestellung_wpf/v16
+/bestellung_wpf/obj/Debug
+/bestellung_wpf/packages.config
+/bestellung_wpf/mongocrypt.dll
+/bestellung_wpf/libmongocrypt.so
+/bestellung_wpf/libmongocrypt.dylib

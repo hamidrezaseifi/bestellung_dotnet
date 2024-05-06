@@ -1,0 +1,59 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bestellung_wpf"
+        xmlns:views="clr-namespace:bestellung_wpf.views" x:Class="bestellung_wpf.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="950" Width="1600" Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
+            <Label x:Name="lblBenutzer" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Grid.Column="1" Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
+            <Button x:Name="btnTest" Content="Test" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Width="85"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnTest_Click" />
+
+        </Grid>
+        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Width="120" Header="Datum" x:Name="datesColumn" DisplayMemberBinding="{Binding dates}" />
+                    <GridViewColumn Width="120" Header="Kunde" x:Name="customerColumn" DisplayMemberBinding="{Binding customer}" />
+                    <GridViewColumn Width="120" Header="Fahrzeug" x:Name="fahrzeugColumn" DisplayMemberBinding="{Binding fahrzeug}" />
+                    <GridViewColumn Width="140" Header="Fahrgestellnummer" x:Name="fahrgestellnummerColumn" DisplayMemberBinding="{Binding fahrgestellnummer}" />
+                    <GridViewColumn Width="120" Header="HSN/TSN" x:Name="hsnTsnColumn" DisplayMemberBinding="{Binding hsnTsn}" />
+                    <GridViewColumn Width="350" Header="Artikel" x:Name="articelsColumn" DisplayMemberBinding="{Binding artikel}" />
+                    <GridViewColumn Width="120" Header="Betrag" x:Name="betragColumn" DisplayMemberBinding="{Binding betrag}" />
+                    <GridViewColumn Width="120" Header="Endbetrag" x:Name="endBetragColumn" DisplayMemberBinding="{Binding endBetrag}" />
+                    <GridViewColumn Width="120" Header="Anzahlung" x:Name="anzahlungColumn" DisplayMemberBinding="{Binding anzahlung}" />
+                    <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="offeneBetragColumn" DisplayMemberBinding="{Binding offeneBetrag}" />
+
+
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+
+    </Grid>
+</Window>

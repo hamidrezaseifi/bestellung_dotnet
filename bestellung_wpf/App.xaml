@@ -1,0 +1,11 @@
+﻿<Application
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:bestellung_wpf"
+             x:Class="bestellung_wpf.App"
+             Startup="Application_Startup"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.MainWindow>
+        <local:MainWindow/>
+    </Application.MainWindow>
+</Application>

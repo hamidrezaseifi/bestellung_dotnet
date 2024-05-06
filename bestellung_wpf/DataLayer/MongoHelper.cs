@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace bestellung.DataLayer
+namespace bestellung_wpf.DataLayer
 {
     public abstract class MongoHelper<T> : IMongoHelper<T>
     {

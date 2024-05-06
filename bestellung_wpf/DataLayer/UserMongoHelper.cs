@@ -1,11 +1,11 @@
-﻿using bestellung.models;
+﻿using bestellung_wpf.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bestellung.DataLayer
+namespace bestellung_wpf.DataLayer
 {
     class UserMongoHelper : MongoHelper<User>
     {
