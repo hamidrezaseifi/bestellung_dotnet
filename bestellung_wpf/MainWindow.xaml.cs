@@ -65,20 +65,12 @@ namespace bestellung_wpf
             dialog.ShowDialog();
         }
 
-        private void btnTest_Click(object sender, RoutedEventArgs e)
+        private void btnAnfrage_Click(object sender, RoutedEventArgs e)
         {
-            long i = DateTime.Now.Millisecond;
+            NewAnfrageForm form = new NewAnfrageForm(view, this);
+            form.ShowDialog();
 
-            BestellungItem item = new BestellungItem();
-            item.id = "id-" + i;
-            item.customer = "Kunde: " + i;
-            item.betrag = i;
-            item.endBetrag = 1 * 2;
-            item.anzahlung = 3;
-
-            BestellungItemUi itemUi = new BestellungItemUi(item);
-
-            view.bestellungItemObservable.List.Add(itemUi);
+            BestellungItemUi selcted = form.BestellungItem;
         }
     }
 }

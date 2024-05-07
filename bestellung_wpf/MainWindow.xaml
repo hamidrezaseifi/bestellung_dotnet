@@ -21,6 +21,8 @@
 
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="100"/>
@@ -29,9 +31,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
-            <Label x:Name="lblBenutzer" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Grid.Column="1" Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
-            <Button x:Name="btnTest" Content="Test" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Width="85"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnTest_Click" />
+            <Button x:Name="btnAnfrage" Content="Anfrage" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Width="100" Height="30"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnAnfrage_Click" />
+            <Label x:Name="lblBenutzer" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Grid.Column="3" Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
+            <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
         </Grid>
         <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" >
@@ -49,7 +51,7 @@
                     <GridViewColumn Width="120" Header="Endbetrag" x:Name="endBetragColumn" DisplayMemberBinding="{Binding endBetrag}" />
                     <GridViewColumn Width="120" Header="Anzahlung" x:Name="anzahlungColumn" DisplayMemberBinding="{Binding anzahlung}" />
                     <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="offeneBetragColumn" DisplayMemberBinding="{Binding offeneBetrag}" />
-
+                    <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="statusColumn" DisplayMemberBinding="{Binding status}" />
 
                 </GridView>
             </ListView.View>

@@ -115,9 +115,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
+    <Compile Include="enums\BestellungStatus.cs" />
+    <Compile Include="forms\NewAnfrageForm.xaml.cs">
+      <DependentUpon>NewAnfrageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="models\ArticleItem.cs" />
     <Compile Include="models\BestellungItemUi.cs" />
     <Compile Include="views\MainWindowView.cs" />
+    <Compile Include="views\NewAnfrageView.cs" />
+    <Page Include="forms\NewAnfrageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="forms\SelectUserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using bestellung_wpf.enums;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace bestellung_wpf.models
 
         public double anzahlung{ get; set; }
 
-        public string status{ get; set; }
+        public BestellungStatus status { get; set; }
 
         public List<ArticleItem> articles { get { return _articles; } set{ _articles = value; } }
         

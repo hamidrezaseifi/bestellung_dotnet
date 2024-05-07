@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Configuration;
+using System;
 
 namespace bestellung_wpf.DataLayer
 {
@@ -57,6 +58,12 @@ namespace bestellung_wpf.DataLayer
         {
             IMongoDatabase database = GetDatabase();
             database.GetCollection<T>(GetCollectionName()).UpdateOne(filter, document);
+        }
+
+        public List<S> GetDistinct<S>(String column)
+        {
+            IMongoDatabase database = GetDatabase();
+            return database.GetCollection<T>(GetCollectionName()).Distinct<S>(column, FilterDefinition<T>.Empty).ToList();
         }
     }
 }

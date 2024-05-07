@@ -1,34 +1,44 @@
-﻿using System;
+﻿using bestellung_wpf.enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace bestellung_wpf.models
 {
-    public class BestellungItemUi
+    public class BestellungItemUi: INotifyPropertyChanged
     {
         private BestellungItem _item;
 
-        public string id { get { return _item.id; } }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public string customer { get { return _item.customer; } }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        public string user { get { return _item.user; } }
+        public string id { get { return _item.id; } set { _item.id = value; NotifyPropertyChanged(); } }
 
-        public string fahrzeug { get { return _item.fahrzeug; } }
+        public string customer { get { return _item.customer; } set { _item.customer = value; NotifyPropertyChanged(); } }
 
-        public string fahrgestellnummer { get { return _item.fahrgestellnummer; } }
+        public string user { get { return _item.user; } set { _item.user = value; NotifyPropertyChanged(); } }
 
-        public string hsnTsn { get { return _item.hsnTsn; } }
+        public string fahrzeug { get { return _item.fahrzeug; } set { _item.fahrzeug = value; NotifyPropertyChanged(); } }
 
-        public double betrag { get { return _item.betrag; } }
+        public string fahrgestellnummer { get { return _item.fahrgestellnummer; } set { _item.fahrgestellnummer = value; NotifyPropertyChanged(); } }
 
-        public double endBetrag { get { return _item.endBetrag; } }
+        public string hsnTsn { get { return _item.hsnTsn; } set { _item.hsnTsn = value; NotifyPropertyChanged(); } }
 
-        public double anzahlung { get { return _item.anzahlung; } }
+        public double betrag { get { return _item.betrag; } set { _item.betrag = value; NotifyPropertyChanged(); } }
 
-        public string status { get { return _item.status; } }
+        public double endBetrag { get { return _item.endBetrag; } set { _item.endBetrag = value; NotifyPropertyChanged(); } }
+
+        public double anzahlung { get { return _item.anzahlung; } set { _item.anzahlung = value; NotifyPropertyChanged(); } }
+
+        public BestellungStatus status { get { return _item.status; } set { _item.status = value; NotifyPropertyChanged(); } }
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 

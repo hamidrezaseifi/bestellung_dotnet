@@ -19,5 +19,8 @@ namespace bestellung_wpf.DataLayer
 
         void DeleteDocuments(FilterDefinition<T> filter);
 
+        List<S> GetDistinct<S>(String column);
+
+
     }
 }
