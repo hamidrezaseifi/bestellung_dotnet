@@ -1,18 +1,19 @@
-﻿<Window x:Name="window" x:Class="bestellung_wpf.forms.NewAnfrageForm"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bestellung_wpf.forms"
+        xmlns:utils="clr-namespace:bestellung_wpf.utils" x:Name="window" x:Class="bestellung_wpf.forms.NewAnfrageForm"
         mc:Ignorable="d"
-        Title="Neue Anfrage ..." Height="450" Width="800" WindowStartupLocation="CenterOwner" DataContext="{Binding AnfrageView, RelativeSource={RelativeSource Self}}">
-    <Grid>
+        Title="Neue Anfrage ..." Height="450" Width="850" WindowStartupLocation="CenterOwner" DataContext="{Binding AnfrageView, RelativeSource={RelativeSource Self}}">
+    <Grid Margin="0,0,10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -21,12 +22,19 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Kunde" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
-        <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" />
+        <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" />
 
-        <Label Content="Farhzeug" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
-        <TextBox x:Name="txtFahrzeug" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrzeug, ElementName=window}" VerticalAlignment="Center"/>
-        <Button Content="Button" Grid.Column="5" HorizontalAlignment="Left" Margin="39.667,268,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Farhzeug" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+        <utils:CustomeTextBox x:Name="txtFahrzeug" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrzeug, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="2"/>
+        <Label Content="Fahrgestellnummer" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" />
+        <utils:CustomeTextBox x:Name="txtFahrgestellnummer" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrgestellnummer, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="3"/>
+        <Label Content="HSN/TSN" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" />
+        <utils:CustomeTextBox x:Name="txtHsnTsh" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.hsnTsn, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="4" />
+        <Label Content="Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
+        <utils:CustomeTextBox x:Name="txtBetrag" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.betrag, ElementName=window}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="5" />
+        <Label Content="End-Betrag" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" />
+        <utils:CustomeTextBox x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.endBetrag, ElementName=window}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="6" />
 
 
     </Grid>

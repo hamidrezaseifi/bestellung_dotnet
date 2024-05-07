@@ -121,6 +121,8 @@
     </Compile>
     <Compile Include="models\ArticleItem.cs" />
     <Compile Include="models\BestellungItemUi.cs" />
+    <Compile Include="utils\CustomeTextBox.cs" />
+    <Compile Include="utils\GeneralUtils.cs" />
     <Compile Include="views\MainWindowView.cs" />
     <Compile Include="views\NewAnfrageView.cs" />
     <Page Include="forms\NewAnfrageForm.xaml">

@@ -1,9 +1,12 @@
 ﻿using bestellung_wpf.models;
+using bestellung_wpf.utils;
 using bestellung_wpf.views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,5 +44,6 @@ namespace bestellung_wpf.forms
             User user = ((App)Application.Current).GlobalValues.CurrentUser;
             Background = user.Brush;
         }
+
     }
 }
