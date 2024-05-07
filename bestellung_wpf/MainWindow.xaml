@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bestellung_wpf"
         xmlns:views="clr-namespace:bestellung_wpf.views" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="1700" Closed="Window_Closed"
+        Title="MainWindow" Height="950" Width="1800" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
                     <GridViewColumn Width="120" Header="Endbetrag" x:Name="endBetragColumn" DisplayMemberBinding="{Binding endBetrag}" />
                     <GridViewColumn Width="120" Header="Anzahlung" x:Name="anzahlungColumn" DisplayMemberBinding="{Binding anzahlung}" />
                     <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="offeneBetragColumn" DisplayMemberBinding="{Binding offeneBetrag}" />
-                    <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="statusColumn" DisplayMemberBinding="{Binding status}" />
+                    <GridViewColumn Width="100" Header="Status" x:Name="statusColumn" DisplayMemberBinding="{Binding status}" />
 
                 </GridView>
             </ListView.View>

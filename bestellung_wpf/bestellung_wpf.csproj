@@ -120,6 +120,7 @@
       <DependentUpon>NewAnfrageForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="models\ArticleItem.cs" />
+    <Compile Include="models\ArticleItemUi.cs" />
     <Compile Include="models\BestellungItemUi.cs" />
     <Compile Include="utils\CustomeTextBox.cs" />
     <Compile Include="utils\GeneralUtils.cs" />

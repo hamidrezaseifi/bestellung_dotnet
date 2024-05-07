@@ -37,8 +37,18 @@ namespace bestellung_wpf.forms
 
             InitializeComponent();
 
-            //DataContext = _anfrageView;
-            //cmbCustomers.ItemsSource = _anfrageView.CustomerList;
+            for (int i = 1; i < 4; i++) {
+                ArticleItem articleItem = new ArticleItem();
+                articleItem.articleNumber = "articleNumber " + i;
+                articleItem.manufacturer = "manufacturer " + i;
+                articleItem.name = "name " + i;
+                articleItem.partNumber = "partNumber " + i;
+                articleItem.status = "status " + i;
+
+                ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
+
+                this.BestellungItem.articles.Add(articleItemUi);
+            }
             
 
             User user = ((App)Application.Current).GlobalValues.CurrentUser;

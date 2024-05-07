@@ -12,6 +12,7 @@ namespace bestellung_wpf.models
     public class BestellungItemUi: INotifyPropertyChanged
     {
         private BestellungItem _item;
+        private List<ArticleItemUi> _articles;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,7 +45,19 @@ namespace bestellung_wpf.models
 
         public BestellungItemUi(BestellungItem item) {
             this._item = item;
+
+            _articles = new List<ArticleItemUi>();
+            item.articles.ForEach(x => { _articles.Add(new ArticleItemUi(x));});
         }
+
+        public List<ArticleItemUi> articles { get { return _articles; } set { 
+                _articles = value;
+                _item.articles.Clear();
+                _articles.ForEach(x => { _item.articles.Add(ArticleItem.fromUi(x)); });
+
+                NotifyPropertyChanged(); 
+            } }
+
         public string articleNames {
             get {
                 String val = "";

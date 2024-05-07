@@ -8,13 +8,33 @@ namespace bestellung_wpf.models
 {
     public class ArticleItem
     {
+        public ArticleItem()
+        {
+        }
+
+        public static ArticleItem fromUi(ArticleItemUi uiItem)
+        {
+            ArticleItem item = new ArticleItem();
+
+            item.name = uiItem.name;
+            item.manufacturer = uiItem.manufacturer;
+            item.articleNumber = uiItem.articleNumber;
+            item.partNumber = uiItem.partNumber;
+            item.status = uiItem.status;
+
+            return item;
+        }
+
         public string name { get; set; }
         public string manufacturer { get; set; }
         public string articleNumber { get; set; }
         public string partNumber { get; set; }
+        public string status { get; set; }
+
+        
 
         public override  string ToString() {
-            return name + " Marke(" + manufacturer + ") ArtikelNummer(" + articleNumber + ") PartNummer(" + partNumber + ")";
+            return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
         }
     }
 }

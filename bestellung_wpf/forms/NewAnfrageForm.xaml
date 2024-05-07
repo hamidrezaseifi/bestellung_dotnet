@@ -19,8 +19,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>        
         </Grid.RowDefinitions>
         <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" />
@@ -36,6 +36,17 @@
         <Label Content="End-Betrag" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" />
         <utils:CustomeTextBox x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.endBetrag, ElementName=window}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="6" />
 
-
+        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding AnfrageView.BestellungItem.articles, ElementName=window}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Width="100" Header="Name" x:Name="nameColumn" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Width="120" Header="Marke" x:Name="manufacturerColumn" DisplayMemberBinding="{Binding manufacturer}" />
+                    <GridViewColumn Width="120" Header="Artikelnummer" x:Name="articleNumberColumn" DisplayMemberBinding="{Binding articleNumber}" />
+                    <GridViewColumn Width="120" Header="Partnummer" x:Name="partNumberColumn" DisplayMemberBinding="{Binding partNumber}" />
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
