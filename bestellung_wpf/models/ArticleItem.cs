@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bestellung_wpf.enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace bestellung_wpf.models
     {
         public ArticleItem()
         {
+            status = BestellungStatus.Anfrage.ToString();
         }
 
         public static ArticleItem fromUi(ArticleItemUi uiItem)

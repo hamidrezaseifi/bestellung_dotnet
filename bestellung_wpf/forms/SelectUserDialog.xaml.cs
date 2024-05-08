@@ -50,6 +50,7 @@ namespace bestellung_wpf.forms
                 Grid.SetRow(btn, row);
                 Grid.SetColumn(btn, 0);
                 btn.Margin = new Thickness(0, 5, 0, 0);
+                btn.FontSize = 16;
 
                 btn.Click += UserButton_Click; ;
                 grdMain.Children.Add(btn);

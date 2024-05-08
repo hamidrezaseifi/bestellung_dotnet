@@ -25,13 +25,8 @@ namespace bestellung_wpf.views
 
             bestellungItemObservable = new BestellungItemCollection();
 
-            List<BestellungItem> documentList = bestellungItemMongoHlper.GetAllDocuments();
            
-            for (int i = 0; i < documentList.Count; i++)
-            {
-                bestellungItemObservable.List.Add(new BestellungItemUi(documentList[i]));
 
-            }
             /*int userIndex = 0;
 
             for (int i = 1; i < 11; i++)
@@ -68,6 +63,24 @@ namespace bestellung_wpf.views
                 bestellungItemObservable.List.Add(item);
                 bestellungItemMongoHlper.CreateDocument(item);
             }*/
+        }
+
+        public void insertNewBestellung(BestellungItemUi bestellungItem)
+        {
+            bestellungItemMongoHlper.CreateDocument(bestellungItem.Item);
+            
+            ReloadData();
+        }
+
+        public void ReloadData() {
+            List<BestellungItem> documentList = bestellungItemMongoHlper.GetAllDocuments();
+            bestellungItemObservable.List.Clear();
+            for (int i = 0; i < documentList.Count; i++)
+            {
+                bestellungItemObservable.List.Add(new BestellungItemUi(documentList[i]));
+
+            }
+            
         }
     }
 }

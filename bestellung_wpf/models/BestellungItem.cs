@@ -13,6 +13,10 @@ namespace bestellung_wpf.models
     {
         private List<ArticleItem> _articles = new List<ArticleItem>();
 
+        public BestellungItem() {
+            status = BestellungStatus.Anfrage;
+            anfrageDate = DateTime.Now;
+        }
         [BsonId]
         public ObjectId _id { get; set; }
 

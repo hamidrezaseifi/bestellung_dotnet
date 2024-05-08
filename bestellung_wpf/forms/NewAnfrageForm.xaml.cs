@@ -29,6 +29,10 @@ namespace bestellung_wpf.forms
 
         public BestellungItemUi BestellungItem { get { return _anfrageView.BestellungItem; } }
 
+        public bool IsSelected { get => _isSelected; set => _isSelected = value; }
+
+        private bool _isSelected = false;
+
         public NewAnfrageForm(MainWindowView view, Window owner)
         {
             _anfrageView = new NewAnfrageView(view);
@@ -37,13 +41,8 @@ namespace bestellung_wpf.forms
 
             InitializeComponent();
 
-            for (int i = 1; i < 4; i++) {
+            for (int i = 1; i < 6; i++) {
                 ArticleItem articleItem = new ArticleItem();
-                articleItem.articleNumber = "articleNumber " + i;
-                articleItem.manufacturer = "manufacturer " + i;
-                articleItem.name = "name " + i;
-                articleItem.partNumber = "partNumber " + i;
-                articleItem.status = "status " + i;
 
                 ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
 
@@ -55,5 +54,11 @@ namespace bestellung_wpf.forms
             Background = user.Brush;
         }
 
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            _isSelected = true;
+
+            Close();
+        }
     }
 }

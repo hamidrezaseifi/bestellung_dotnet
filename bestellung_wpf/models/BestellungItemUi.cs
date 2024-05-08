@@ -1,6 +1,7 @@
 ﻿using bestellung_wpf.enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,7 +13,7 @@ namespace bestellung_wpf.models
     public class BestellungItemUi: INotifyPropertyChanged
     {
         private BestellungItem _item;
-        private List<ArticleItemUi> _articles;
+        private ObservableCollection<ArticleItemUi> _articles;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,39 +22,39 @@ namespace bestellung_wpf.models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public string id { get { return _item.id; } set { _item.id = value; NotifyPropertyChanged(); } }
+        public string id { get { return Item.id; } set { Item.id = value; NotifyPropertyChanged(); } }
 
-        public string customer { get { return _item.customer; } set { _item.customer = value; NotifyPropertyChanged(); } }
+        public string customer { get { return Item.customer; } set { Item.customer = value; NotifyPropertyChanged(); } }
 
-        public string user { get { return _item.user; } set { _item.user = value; NotifyPropertyChanged(); } }
+        public string user { get { return Item.user; } set { Item.user = value; NotifyPropertyChanged(); } }
 
-        public string fahrzeug { get { return _item.fahrzeug; } set { _item.fahrzeug = value; NotifyPropertyChanged(); } }
+        public string fahrzeug { get { return Item.fahrzeug; } set { Item.fahrzeug = value; NotifyPropertyChanged(); } }
 
-        public string fahrgestellnummer { get { return _item.fahrgestellnummer; } set { _item.fahrgestellnummer = value; NotifyPropertyChanged(); } }
+        public string fahrgestellnummer { get { return Item.fahrgestellnummer; } set { Item.fahrgestellnummer = value; NotifyPropertyChanged(); } }
 
-        public string hsnTsn { get { return _item.hsnTsn; } set { _item.hsnTsn = value; NotifyPropertyChanged(); } }
+        public string hsnTsn { get { return Item.hsnTsn; } set { Item.hsnTsn = value; NotifyPropertyChanged(); } }
 
-        public double betrag { get { return _item.betrag; } set { _item.betrag = value; NotifyPropertyChanged(); } }
+        public double betrag { get { return Item.betrag; } set { Item.betrag = value; NotifyPropertyChanged(); } }
 
-        public double endBetrag { get { return _item.endBetrag; } set { _item.endBetrag = value; NotifyPropertyChanged(); } }
+        public double endBetrag { get { return Item.endBetrag; } set { Item.endBetrag = value; NotifyPropertyChanged(); } }
 
-        public double anzahlung { get { return _item.anzahlung; } set { _item.anzahlung = value; NotifyPropertyChanged(); } }
+        public double anzahlung { get { return Item.anzahlung; } set { Item.anzahlung = value; NotifyPropertyChanged(); } }
 
-        public BestellungStatus status { get { return _item.status; } set { _item.status = value; NotifyPropertyChanged(); } }
+        public BestellungStatus status { get { return Item.status; } set { Item.status = value; NotifyPropertyChanged(); } }
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
         public BestellungItemUi(BestellungItem item) {
-            this._item = item;
+            this.Item = item;
 
-            _articles = new List<ArticleItemUi>();
+            _articles = new ObservableCollection<ArticleItemUi>();
             item.articles.ForEach(x => { _articles.Add(new ArticleItemUi(x));});
         }
 
-        public List<ArticleItemUi> articles { get { return _articles; } set { 
+        public ObservableCollection<ArticleItemUi> articles { get { return _articles; } set { 
                 _articles = value;
-                _item.articles.Clear();
-                _articles.ForEach(x => { _item.articles.Add(ArticleItem.fromUi(x)); });
+                Item.articles.Clear();
+                _articles.AsParallel().ForAll(x => { Item.articles.Add(ArticleItem.fromUi(x)); });
 
                 NotifyPropertyChanged(); 
             } }
@@ -61,7 +62,7 @@ namespace bestellung_wpf.models
         public string articleNames {
             get {
                 String val = "";
-                foreach (ArticleItem item in _item.articles){
+                foreach (ArticleItem item in Item.articles){
                     val += item.ToString() + "\r\n";
                 }
                 return val; 
@@ -73,14 +74,16 @@ namespace bestellung_wpf.models
             get {
                 String val = "";
 
-                val += "Anfrage: " + GetDateString(_item.anfrageDate) + "\r\n";
-                val += "Bestellung: " + GetDateString(_item.bestellungDate) + "\r\n";
-                val += "Lieferung: " + GetDateString(_item.lieferungDate) + "\r\n";
-                val += "Rückgabe: " + GetDateString(_item.rueckgabeDate) + "\r\n";
+                val += "Anfrage: " + GetDateString(Item.anfrageDate) + "\r\n";
+                val += "Bestellung: " + GetDateString(Item.bestellungDate) + "\r\n";
+                val += "Lieferung: " + GetDateString(Item.lieferungDate) + "\r\n";
+                val += "Rückgabe: " + GetDateString(Item.rueckgabeDate) + "\r\n";
 
                 return val;
             }
         }
+
+        public BestellungItem Item { get => _item; set => _item = value; }
 
         private string GetDateString(DateTime date) {
             if (date == null) {

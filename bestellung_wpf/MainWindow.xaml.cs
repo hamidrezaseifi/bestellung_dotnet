@@ -71,6 +71,8 @@ namespace bestellung_wpf
             form.ShowDialog();
 
             BestellungItemUi selcted = form.BestellungItem;
+
+            view.insertNewBestellung(form.BestellungItem);
         }
     }
 }

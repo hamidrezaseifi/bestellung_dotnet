@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bestellung_wpf.forms"
         mc:Ignorable="d"
-        Title="SelectUserDialog" Height="303.528" Width="250">
+        Title="Benutzer ..." Height="303.528" Width="250" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid x:Name="grdMain">
 
     </Grid>
