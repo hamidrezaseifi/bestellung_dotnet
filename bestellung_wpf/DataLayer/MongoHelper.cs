@@ -29,7 +29,7 @@ namespace bestellung_wpf.DataLayer
             return database.GetCollection<T>(GetCollectionName());
         }
 
-        public void CreateDocument(T document)
+        public void InsertDocument(T document)
         {
             IMongoDatabase database = GetDatabase();
             database.GetCollection<T>(GetCollectionName()).InsertOne(document);
@@ -50,8 +50,17 @@ namespace bestellung_wpf.DataLayer
 
         public List<T> GetFilteredDocuments(FilterDefinition<T> filter)
         {
+            return GetFilteredDocuments(filter, null);
+        }
+
+        public List<T> GetFilteredDocuments(FilterDefinition<T> filter, SortDefinition<T> sort)
+        {
             IMongoDatabase database = GetDatabase();
-            return database.GetCollection<T>(GetCollectionName()).Find(filter).ToList();
+            IFindFluent<T, T> find = database.GetCollection<T>(GetCollectionName()).Find(filter);
+            if (sort != null) {
+                find = find.Sort(sort);
+            }
+            return find.ToList();
         }
 
         public void UpdateDocument(FilterDefinition<T> filter, UpdateDefinition<T> document)

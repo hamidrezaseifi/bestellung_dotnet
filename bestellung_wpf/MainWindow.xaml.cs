@@ -40,15 +40,15 @@ namespace bestellung_wpf
             GlobalValues_PropertyChanged(null, null);
             ((App)Application.Current).GlobalValues.PropertyChanged += GlobalValues_PropertyChanged;
 
-            
-            
+            WindowHelper.Initialize(this);
+
         }
 
         private void GlobalValues_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (((App)Application.Current).GlobalValues.CurrentUser != null) {
                 User user = ((App)Application.Current).GlobalValues.CurrentUser;
-                Background = user.Brush;
+                WindowHelper.Initialize(this);
                 lblBenutzer.Content = user.name;
             }
             

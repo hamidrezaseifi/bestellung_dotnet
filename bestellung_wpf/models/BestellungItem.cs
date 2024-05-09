@@ -13,9 +13,11 @@ namespace bestellung_wpf.models
     {
         private List<ArticleItem> _articles = new List<ArticleItem>();
 
-        public BestellungItem() {
+        public BestellungItem(string id, String _user) {
             status = BestellungStatus.Anfrage;
             anfrageDate = DateTime.Now;
+            this.user = _user;
+            this.id = id;
         }
         [BsonId]
         public ObjectId _id { get; set; }
@@ -49,7 +51,12 @@ namespace bestellung_wpf.models
         public BestellungStatus status { get; set; }
 
         public List<ArticleItem> articles { get { return _articles; } set{ _articles = value; } }
-        
+
+
+        internal static string CreateNewId(DateTime date, int iItem)
+        {
+            return date.ToString("yyyyMMdd") + "-" + iItem.ToString();
+        }
 
     }
 }

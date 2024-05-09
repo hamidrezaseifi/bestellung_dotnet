@@ -115,10 +115,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
+    <Compile Include="DataLayer\IFindFluent.cs" />
     <Compile Include="enums\BestellungStatus.cs" />
     <Compile Include="forms\NewAnfrageForm.xaml.cs">
       <DependentUpon>NewAnfrageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="forms\WindowBase.cs" />
     <Compile Include="models\ArticleItem.cs" />
     <Compile Include="models\ArticleItemUi.cs" />
     <Compile Include="models\BestellungItemUi.cs" />

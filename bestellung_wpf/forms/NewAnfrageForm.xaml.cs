@@ -41,17 +41,8 @@ namespace bestellung_wpf.forms
 
             InitializeComponent();
 
-            for (int i = 1; i < 6; i++) {
-                ArticleItem articleItem = new ArticleItem();
+            WindowHelper.Initialize(this);
 
-                ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
-
-                this.BestellungItem.articles.Add(articleItemUi);
-            }
-            
-
-            User user = ((App)Application.Current).GlobalValues.CurrentUser;
-            Background = user.Brush;
         }
 
         private void btnApply_Click(object sender, RoutedEventArgs e)

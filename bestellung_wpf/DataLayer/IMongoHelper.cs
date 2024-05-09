@@ -13,7 +13,9 @@ namespace bestellung_wpf.DataLayer
 
         List<T> GetFilteredDocuments(FilterDefinition<T> filter);
 
-        void CreateDocument(T document);
+        List<T> GetFilteredDocuments(FilterDefinition<T> filter, SortDefinition<T> sort);
+
+        void InsertDocument(T document);
 
         void UpdateDocument(FilterDefinition<T> filter, UpdateDefinition<T> document);
 

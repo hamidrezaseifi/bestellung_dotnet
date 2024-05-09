@@ -25,7 +25,7 @@ namespace bestellung_wpf.views
 
             bestellungItemObservable = new BestellungItemCollection();
 
-           
+            ReloadData();
 
             /*int userIndex = 0;
 
@@ -65,9 +65,12 @@ namespace bestellung_wpf.views
             }*/
         }
 
+        public User CurrentUser {
+            get { return globalValues.CurrentUser; }
+        }
         public void insertNewBestellung(BestellungItemUi bestellungItem)
         {
-            bestellungItemMongoHlper.CreateDocument(bestellungItem.Item);
+            bestellungItemMongoHlper.InsertDocument(bestellungItem.Item);
             
             ReloadData();
         }
