@@ -26,21 +26,24 @@ namespace bestellung_wpf.views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<String> _customerList;
+        private List<string> _customerList;
+
+        private List<string> _fahrzeugList;
 
         public NewAnfrageView(MainWindowView view) {
             mainView = view;
             _bestellungItem = new BestellungItemUi(bestellungItemMongoHlper.CreateNew(mainView.CurrentUser.name));
 
-            _customerList = bestellungItemMongoHlper.GetDistinct<String>("customer");
+            _customerList = bestellungItemMongoHlper.GetDistinct<string>("customer");
+            _fahrzeugList = bestellungItemMongoHlper.GetDistinct<string>("fahrzeug");
 
 
             for (int i = 1; i < 6; i++)
             {
-                ArticleItem articleItem = new ArticleItem();
+                ArticleItem articleItem = new ArticleItem(true);
 
                 ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
-
+                articleItemUi.index = i;
                 this.BestellungItem.articles.Add(articleItemUi);
             }
 
@@ -50,6 +53,6 @@ namespace bestellung_wpf.views
 
         public List<String> CustomerList { get { return _customerList; }}
 
-
+        public List<string> FahrzeugList { get => _fahrzeugList; set => _fahrzeugList = value; }
     }
 }

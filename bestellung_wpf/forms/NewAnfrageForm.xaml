@@ -23,10 +23,10 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" KeyUp="cmbCustomers_KeyUp" />
+        <utils:FilterComboBox x:Name="cmbCustomers" IsFiltered="True" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" IsTextSearchEnabled="False" />
 
         <Label Content="Farhzeug" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-        <utils:CustomeTextBox x:Name="txtFahrzeug" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrzeug, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="2"/>
+        <utils:FilterComboBox x:Name="cmbFahrzeug" IsFiltered="True" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.FahrzeugList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.fahrzeug, ElementName=window}" TabIndex="2" IsTextSearchEnabled="False" />
         <Label Content="Fahrgestellnummer" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" />
         <utils:CustomeTextBox x:Name="txtFahrgestellnummer" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrgestellnummer, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="3"/>
         <Label Content="HSN/TSN" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" />
@@ -39,7 +39,7 @@
         <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding AnfrageView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding index}" />
                     <GridViewColumn Width="100" Header="Name" x:Name="nameColumn">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

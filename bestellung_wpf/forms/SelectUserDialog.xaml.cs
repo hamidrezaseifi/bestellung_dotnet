@@ -68,9 +68,11 @@ namespace bestellung_wpf.forms
             if (owner == null)
             {
                 this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                this.ShowInTaskbar = true;
             }
             else {
                 this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                this.ShowInTaskbar = false;
             }
             
         }

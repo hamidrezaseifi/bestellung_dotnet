@@ -52,21 +52,5 @@ namespace bestellung_wpf.forms
             Close();
         }
 
-        private void cmbCustomers_KeyUp(object sender, KeyEventArgs e)
-        {
-            CollectionView itemsViewOriginal = (CollectionView)CollectionViewSource.GetDefaultView(cmbCustomers.ItemsSource);
-
-            itemsViewOriginal.Filter = ((o) =>
-            {
-                if (String.IsNullOrEmpty(cmbCustomers.Text)) return true;
-                else
-                {
-                    if (((string)o).Contains(cmbCustomers.Text)) return true;
-                    else return false;
-                }
-            });
-
-            itemsViewOriginal.Refresh();
-        }
     }
 }

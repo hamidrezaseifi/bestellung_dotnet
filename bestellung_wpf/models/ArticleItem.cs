@@ -14,6 +14,15 @@ namespace bestellung_wpf.models
             status = BestellungStatus.Anfrage.ToString();
         }
 
+        public ArticleItem(bool initString): this()
+        {
+            name = "            ";
+            manufacturer = "            ";
+            articleNumber = "            ";
+            partNumber = "            ";
+            
+        }
+
         public static ArticleItem fromUi(ArticleItemUi uiItem)
         {
             ArticleItem item = new ArticleItem();
