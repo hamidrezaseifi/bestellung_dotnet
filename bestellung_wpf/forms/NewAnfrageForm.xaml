@@ -23,7 +23,7 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" />
+        <ComboBox x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding AnfrageView.CustomerList, ElementName=window}" Text="{Binding AnfrageView.BestellungItem.customer, ElementName=window}" TabIndex="1" KeyUp="cmbCustomers_KeyUp" />
 
         <Label Content="Farhzeug" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
         <utils:CustomeTextBox x:Name="txtFahrzeug" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding AnfrageView.BestellungItem.fahrzeug, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="2"/>

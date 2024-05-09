@@ -70,9 +70,13 @@ namespace bestellung_wpf
             NewAnfrageForm form = new NewAnfrageForm(view, this);
             form.ShowDialog();
 
-            BestellungItemUi selcted = form.BestellungItem;
+            if (form.IsSelected) {
+                BestellungItemUi selcted = form.BestellungItem;
 
-            view.insertNewBestellung(form.BestellungItem);
+                view.insertNewBestellung(form.BestellungItem);
+            }
+
+            
         }
     }
 }
