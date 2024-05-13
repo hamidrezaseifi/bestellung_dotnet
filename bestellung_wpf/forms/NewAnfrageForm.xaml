@@ -72,6 +72,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnApply" Content="Anwenden" Grid.Column="5" HorizontalAlignment="Right" Grid.Row="3" VerticalAlignment="Center" Width="92" Click="btnApply_Click" IsEnabled="{Binding AnfrageView.BestellungItem.IsValid, ElementName=window, Mode=OneWay}"/>
+        <Button x:Name="btnApply" Content="Anwenden" Grid.Column="5" HorizontalAlignment="Right" Grid.Row="3" VerticalAlignment="Center" Width="92" Click="btnApply_Click" IsEnabled="{Binding AnfrageView.BestellungItem.IsValid, ElementName=window, IsAsync=True, Mode=OneWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
     </Grid>
 </Window>

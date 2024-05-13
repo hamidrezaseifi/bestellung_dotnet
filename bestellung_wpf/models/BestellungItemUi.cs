@@ -14,12 +14,14 @@ namespace bestellung_wpf.models
     {
         private BestellungItem _item;
         private ObservableCollection<ArticleItemUi> _articles;
+        private bool _isValid = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _isValid = BestellungItemValidator.IsValid(_item);
         }
 
         public string id { get { return Item.id; } set { Item.id = value; NotifyPropertyChanged(); } }
@@ -44,12 +46,7 @@ namespace bestellung_wpf.models
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
-        public bool IsValid
-        {
-            get {
-                return BestellungItemValidator.IsValid(_item);
-            }
-        }
+       
         public BestellungItemUi(BestellungItem item) {
             this.Item = item;
 
@@ -90,6 +87,14 @@ namespace bestellung_wpf.models
         }
 
         public BestellungItem Item { get => _item; set => _item = value; }
+        public bool IsValid { get { 
+                return _isValid; 
+            } 
+            set
+            {
+                _isValid = value;
+            }
+        }
 
         private string GetDateString(DateTime date) {
             if (date == null) {
