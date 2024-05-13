@@ -79,8 +79,8 @@ namespace bestellung_wpf.forms
 
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
 
+            Button btn = sender as Button;
 
             this.globalValues.CurrentUser = btn.Tag as User;
             _selected = true;

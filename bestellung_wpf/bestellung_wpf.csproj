@@ -124,6 +124,7 @@
     <Compile Include="models\ArticleItem.cs" />
     <Compile Include="models\ArticleItemUi.cs" />
     <Compile Include="models\BestellungItemUi.cs" />
+    <Compile Include="models\ValidatorBase.cs" />
     <Compile Include="utils\CustomeTextBox.cs" />
     <Compile Include="utils\FilterComboBox.cs" />
     <Compile Include="utils\GeneralUtils.cs" />

@@ -70,7 +70,7 @@ namespace bestellung_wpf.views
         }
         public void insertNewBestellung(BestellungItemUi bestellungItem)
         {
-            bestellungItemMongoHlper.InsertDocument(bestellungItem.Item);
+            bestellungItemMongoHlper.InsertDocument(bestellungItem.Item.prepare());
             
             ReloadData();
         }

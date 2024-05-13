@@ -44,6 +44,12 @@ namespace bestellung_wpf.models
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
+        public bool IsValid
+        {
+            get {
+                return BestellungItemValidator.IsValid(_item);
+            }
+        }
         public BestellungItemUi(BestellungItem item) {
             this.Item = item;
 

@@ -9,6 +9,8 @@ namespace bestellung_wpf.models
 {
     public class ArticleItem
     {
+        public static readonly string DefaultValue = "            ";
+
         public ArticleItem()
         {
             status = BestellungStatus.Anfrage.ToString();
@@ -16,10 +18,10 @@ namespace bestellung_wpf.models
 
         public ArticleItem(bool initString): this()
         {
-            name = "            ";
-            manufacturer = "            ";
-            articleNumber = "            ";
-            partNumber = "            ";
+            name = DefaultValue;
+            manufacturer = DefaultValue;
+            articleNumber = DefaultValue;
+            partNumber = DefaultValue;
             
         }
 
@@ -42,10 +44,36 @@ namespace bestellung_wpf.models
         public string partNumber { get; set; }
         public string status { get; set; }
 
-        
-
-        public override  string ToString() {
+        public override string ToString() {
             return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
         }
+    }
+
+    public class ArticleItemValidator: ValidatorBase
+    {
+        public static bool IsValid(ArticleItem articleItem) {
+            if (!IsValueValid(articleItem.name))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(articleItem.manufacturer))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(articleItem.articleNumber))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(articleItem.partNumber))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }
