@@ -11,7 +11,7 @@ namespace bestellung_wpf.models
         
         protected static bool IsValueValid(string value)
         {
-            if (value == null || value.Trim() == "" || value == ArticleItem.DefaultValue)
+            if (value == null || value.Trim() == "")
             {
                 return false;
             }

@@ -47,7 +47,7 @@ namespace bestellung_wpf.forms
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            if (!BestellungItemValidator.IsValid(_anfrageView.BestellungItem.Item)) {
+            if (!BestellungItemValidator.IsValid(_anfrageView.BestellungItem)) {
                 _isSelected = true;
 
                 Close();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace bestellung_wpf.models
 {
-    public class ArticleItemUi : INotifyPropertyChanged
+    public class ArticleItemUi : INotifyPropertyChanged, IArticleItem
     {
         private ArticleItem _item;
 
@@ -34,5 +34,32 @@ namespace bestellung_wpf.models
         {
             return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
         }
+
+        public string getName()
+        {
+            return name;
+        }
+
+        public string getManufacturer()
+        {
+            return manufacturer;
+        }
+
+        public string getArticleNumber()
+        {
+            return articleNumber;
+        }
+
+        public string getPartNumber()
+        {
+            return partNumber;
+        }
+
+        public string getStatus()
+        {
+            return status;
+        }
+
     }
+
 }

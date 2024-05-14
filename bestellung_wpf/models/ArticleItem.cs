@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace bestellung_wpf.models
 {
-    public class ArticleItem
+    public class ArticleItem: IArticleItem
     {
-        public static readonly string DefaultValue = "            ";
-
+        
         public ArticleItem()
         {
             status = BestellungStatus.Anfrage.ToString();
@@ -18,10 +17,10 @@ namespace bestellung_wpf.models
 
         public ArticleItem(bool initString): this()
         {
-            name = DefaultValue;
-            manufacturer = DefaultValue;
-            articleNumber = DefaultValue;
-            partNumber = DefaultValue;
+            name = "";
+            manufacturer = "";
+            articleNumber = "";
+            partNumber = "";
             
         }
 
@@ -47,33 +46,31 @@ namespace bestellung_wpf.models
         public override string ToString() {
             return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
         }
-    }
 
-    public class ArticleItemValidator: ValidatorBase
-    {
-        public static bool IsValid(ArticleItem articleItem) {
-            if (!IsValueValid(articleItem.name))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(articleItem.manufacturer))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(articleItem.articleNumber))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(articleItem.partNumber))
-            {
-                return false;
-            }
-
-            return true;
+        public string getName()
+        {
+            return name;
         }
 
+        public string getManufacturer()
+        {
+            return manufacturer;
+        }
+
+        public string getArticleNumber()
+        {
+            return articleNumber;
+        }
+
+        public string getPartNumber()
+        {
+            return partNumber;
+        }
+
+        public string getStatus()
+        {
+            return status;
+        }
     }
+
 }

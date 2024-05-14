@@ -44,7 +44,7 @@ namespace bestellung_wpf.views
 
                 ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
                 articleItemUi.index = i;
-                this.BestellungItem.articles.Add(articleItemUi);
+                this.BestellungItem.AddArticles(articleItemUi);
             }
 
         }

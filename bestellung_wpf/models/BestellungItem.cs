@@ -58,56 +58,6 @@ namespace bestellung_wpf.models
             return date.ToString("yyyyMMdd") + "-" + iItem.ToString();
         }
 
-        public BestellungItem prepare()
-        {
-
-            BestellungItem item = (BestellungItem)this.MemberwiseClone();
-
-            List<ArticleItem> filteredArticles = item.articles.Where(a => ArticleItemValidator.IsValid(a)).ToList();
-
-            if (filteredArticles.Count == 0) {
-                return null;
-            }
-
-            item.articles = filteredArticles;
-
-            return item;
-        }
     }
 
-    public class BestellungItemValidator : ValidatorBase
-    {
-        public static bool IsValid(BestellungItem bestellungItem)
-        {
-            List<ArticleItem> filteredArticles = bestellungItem.articles.Where(a => ArticleItemValidator.IsValid(a)).ToList();
-
-            if (filteredArticles.Count == 0)
-            {
-                return false;
-            }
-
-
-            if (!IsValueValid(bestellungItem.id))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(bestellungItem.customer))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(bestellungItem.user))
-            {
-                return false;
-            }
-
-            if (!IsValueValid(bestellungItem.fahrzeug))
-            {
-                return false;
-            }
-
-            return true;
-        }
-    }
 }

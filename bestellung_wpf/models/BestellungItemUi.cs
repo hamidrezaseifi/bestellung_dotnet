@@ -12,52 +12,110 @@ namespace bestellung_wpf.models
 {
     public class BestellungItemUi: INotifyPropertyChanged
     {
-        private BestellungItem _item;
+        private BestellungItem _item1;
         private ObservableCollection<ArticleItemUi> _articles;
         private bool _isValid = false;
+
+        private string _id;
+
+        public DateTime _anfrageDate;
+
+        public DateTime _bestellungDate;
+
+        public DateTime _lieferungDate;
+
+        public DateTime _rueckgabeDate;
+
+        private string _customer;
+
+        private string _user;
+
+        private string _fahrzeug;
+
+        private string _fahrgestellnummer;
+
+        private string _hsnTsn;
+
+        private double _betrag;
+
+        private double _endBetrag;
+
+        private double _anzahlung;
+
+        private BestellungStatus _status;
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            _isValid = BestellungItemValidator.IsValid(_item);
+            IsValid = BestellungItemValidator.IsValid(this);
         }
 
-        public string id { get { return Item.id; } set { Item.id = value; NotifyPropertyChanged(); } }
+        public string id { get { return _id; } set { _id = value; NotifyPropertyChanged(); } }
 
-        public string customer { get { return Item.customer; } set { Item.customer = value; NotifyPropertyChanged(); } }
+        public string customer { get { return _customer; } set { _customer = value; NotifyPropertyChanged(); } }
 
-        public string user { get { return Item.user; } set { Item.user = value; NotifyPropertyChanged(); } }
+        public void AddArticles(ArticleItemUi articleItemUi)
+        {
+            articleItemUi.PropertyChanged += ArticleItemUi_PropertyChanged;
+            _articles.Add(articleItemUi);
+        }
 
-        public string fahrzeug { get { return Item.fahrzeug; } set { Item.fahrzeug = value; NotifyPropertyChanged(); } }
+        public string user { get { return _user; } set { _user = value; NotifyPropertyChanged(); } }
 
-        public string fahrgestellnummer { get { return Item.fahrgestellnummer; } set { Item.fahrgestellnummer = value; NotifyPropertyChanged(); } }
+        public string fahrzeug { get { return _fahrzeug; } set { _fahrzeug = value; NotifyPropertyChanged(); } }
 
-        public string hsnTsn { get { return Item.hsnTsn; } set { Item.hsnTsn = value; NotifyPropertyChanged(); } }
+        public string fahrgestellnummer { get { return _fahrgestellnummer; } set { _fahrgestellnummer = value; NotifyPropertyChanged(); } }
 
-        public double betrag { get { return Item.betrag; } set { Item.betrag = value; NotifyPropertyChanged(); } }
+        public string hsnTsn { get { return _hsnTsn; } set { _hsnTsn = value; NotifyPropertyChanged(); } }
 
-        public double endBetrag { get { return Item.endBetrag; } set { Item.endBetrag = value; NotifyPropertyChanged(); } }
+        public double betrag { get { return _betrag; } set { _betrag = value; NotifyPropertyChanged(); } }
 
-        public double anzahlung { get { return Item.anzahlung; } set { Item.anzahlung = value; NotifyPropertyChanged(); } }
+        public double endBetrag { get { return _endBetrag; } set { _endBetrag = value; NotifyPropertyChanged(); } }
 
-        public BestellungStatus status { get { return Item.status; } set { Item.status = value; NotifyPropertyChanged(); } }
+        public double anzahlung { get { return _anzahlung; } set { _anzahlung = value; NotifyPropertyChanged(); } }
+
+        public BestellungStatus status { get { return _status; } set { _status = value; NotifyPropertyChanged(); } }
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
        
         public BestellungItemUi(BestellungItem item) {
-            this.Item = item;
+            this._item1 = item;
+
+            this._id = item.id;
+            this._bestellungDate = item.bestellungDate;
+            this._anfrageDate = item.anfrageDate;
+            this._lieferungDate = item.lieferungDate;
+            this._rueckgabeDate = item.rueckgabeDate;
+            this._customer = item.customer;
+            this._user = item.user;
+            this._fahrgestellnummer = item.fahrgestellnummer;
+            this._fahrzeug = item.fahrzeug;
+            this._hsnTsn = item.hsnTsn;
+            this._betrag = item.betrag;
+            this._endBetrag = item.endBetrag;
+            this._anzahlung = item.anzahlung;
+            this._status = item.status;
 
             _articles = new ObservableCollection<ArticleItemUi>();
-            item.articles.ForEach(x => { _articles.Add(new ArticleItemUi(x));});
+            item.articles.ForEach(x => {
+                ArticleItemUi articleItemUi = new ArticleItemUi(x);
+                articleItemUi.PropertyChanged += ArticleItemUi_PropertyChanged;
+                _articles.Add(articleItemUi);
+            });
+        }
+
+        private void ArticleItemUi_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged("articles");
         }
 
         public ObservableCollection<ArticleItemUi> articles { get { return _articles; } set { 
                 _articles = value;
-                Item.articles.Clear();
-                _articles.AsParallel().ForAll(x => { Item.articles.Add(ArticleItem.fromUi(x)); });
 
                 NotifyPropertyChanged(); 
             } }
@@ -65,7 +123,8 @@ namespace bestellung_wpf.models
         public string articleNames {
             get {
                 String val = "";
-                foreach (ArticleItem item in Item.articles){
+                foreach (ArticleItemUi item in _articles)
+                {
                     val += item.ToString() + "\r\n";
                 }
                 return val; 
@@ -77,22 +136,30 @@ namespace bestellung_wpf.models
             get {
                 String val = "";
 
-                val += "Anfrage: " + GetDateString(Item.anfrageDate) + "\r\n";
-                val += "Bestellung: " + GetDateString(Item.bestellungDate) + "\r\n";
-                val += "Lieferung: " + GetDateString(Item.lieferungDate) + "\r\n";
-                val += "Rückgabe: " + GetDateString(Item.rueckgabeDate) + "\r\n";
+                val += "Anfrage: " + GetDateString(_anfrageDate) + "\r\n";
+                val += "Bestellung: " + GetDateString(_bestellungDate) + "\r\n";
+                val += "Lieferung: " + GetDateString(_lieferungDate) + "\r\n";
+                val += "Rückgabe: " + GetDateString(_rueckgabeDate) + "\r\n";
 
                 return val;
             }
         }
 
-        public BestellungItem Item { get => _item; set => _item = value; }
+        //public BestellungItem Item { get => _item; set => _item = value; }
         public bool IsValid { get { 
                 return _isValid; 
             } 
             set
             {
+                bool raiseChange = false;
+                if (_isValid != value) {
+                    raiseChange = true;
+                }
                 _isValid = value;
+                if (raiseChange) {
+                    NotifyPropertyChanged("IsValid");
+                }
+                
             }
         }
 
@@ -101,6 +168,60 @@ namespace bestellung_wpf.models
                 return "";
             }
             return date.ToShortDateString();
+        }
+
+        public BestellungItem prepare()
+        {
+
+            BestellungItem item = (BestellungItem)this.MemberwiseClone();
+
+            List<ArticleItem> filteredArticles = item.articles.Where(a => ArticleItemValidator.IsValid(a)).ToList();
+
+            if (filteredArticles.Count == 0)
+            {
+                return null;
+            }
+
+            item.articles = filteredArticles;
+
+            return item;
+        }
+    }
+
+
+    public class BestellungItemValidator : ValidatorBase
+    {
+        public static bool IsValid(BestellungItemUi bestellungItem)
+        {
+            List<ArticleItemUi> filteredArticles = bestellungItem.articles.Where(a => ArticleItemValidator.IsValid(a)).ToList();
+
+            if (filteredArticles.Count == 0)
+            {
+                return false;
+            }
+
+
+            if (!IsValueValid(bestellungItem.id))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(bestellungItem.customer))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(bestellungItem.user))
+            {
+                return false;
+            }
+
+            if (!IsValueValid(bestellungItem.fahrzeug))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
