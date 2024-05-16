@@ -25,6 +25,8 @@ namespace bestellung_wpf
     {
         public MainWindowView view = new MainWindowView();
         private GlobalValues globalValues = ((App)Application.Current).GlobalValues;
+        private ContextMenu mnuItems;
+
         public MainWindow()
         {
             if (globalValues.UserList.Count == 0)
@@ -77,6 +79,99 @@ namespace bestellung_wpf
             }
 
             
+        }
+
+        private void miBestellen_Click(object sender, RoutedEventArgs e)
+        {
+            Object o = mnuItems.Tag;
+            BestellungItemUi item = (BestellungItemUi)o;
+
+            BestellungChangeForm form = new BestellungChangeForm(view, this, item);
+            form.ShowDialog();
+
+            if (form.IsSelected)
+            {
+                BestellungItemUi selcted = form.BestellungItem;
+
+                //view.InsertNewBestellung(form.BestellungItem);
+            }
+        }
+
+        private void miLiefern_Click(object sender, RoutedEventArgs e)
+        {
+            Object o = mnuItems.Tag;
+            BestellungItemUi item = (BestellungItemUi)o;
+            
+        }
+
+        private void miRueckgabe_Click(object sender, RoutedEventArgs e)
+        {
+            Object o = mnuItems.Tag;
+            BestellungItemUi item = (BestellungItemUi)o;
+
+        }
+
+        private void miLoeschen_Click(object sender, RoutedEventArgs e)
+        {
+            Object o = mnuItems.Tag;
+            BestellungItemUi item = (BestellungItemUi)o;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            BestellungItemUi item = (BestellungItemUi)sender;
+
+            ShowContextMenu((Button)sender, item);
+        }
+
+        private void ShowContextMenu(Control ctrl, BestellungItemUi item) {
+            if (mnuItems == null) {
+                mnuItems = new ContextMenu();
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = "Bestellen";
+                menuItem.Click += miBestellen_Click;
+
+                mnuItems.Items.Add(menuItem);
+
+                menuItem = new MenuItem();
+                menuItem.Header = "Liefern";
+                menuItem.Click += miLiefern_Click;
+
+                mnuItems.Items.Add(menuItem);
+
+                menuItem = new MenuItem();
+                menuItem.Header = "Rückgabe";
+                menuItem.Click += miRueckgabe_Click;
+
+                mnuItems.Items.Add(menuItem);
+                mnuItems.Items.Add(new Separator());
+
+                menuItem = new MenuItem();
+                menuItem.Header = "Löschen";
+                menuItem.Click += miLoeschen_Click;
+            }
+
+            mnuItems.PlacementTarget = ctrl;
+            mnuItems.Tag = item;
+            mnuItems.IsOpen = true; ;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void lstItems_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            if(lstItems.SelectedItem == null){
+                return;
+            }
+
+            BestellungItemUi item = (BestellungItemUi)lstItems.SelectedItem;
+            if (item != null) {
+                ShowContextMenu(lstItems, item);
+            }
         }
     }
 }

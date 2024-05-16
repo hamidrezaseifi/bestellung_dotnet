@@ -48,6 +48,12 @@ namespace bestellung_wpf.DataLayer
             return collection.Find(x => true).ToList();
         }
 
+        public List<T> GetAllDocuments(SortDefinition<T> sort)
+        {
+            IMongoCollection<T> collection = GetCollection();
+            return collection.Find(x => true).Sort(sort).ToList();
+        }
+
         public List<T> GetFilteredDocuments(FilterDefinition<T> filter)
         {
             return GetFilteredDocuments(filter, null);

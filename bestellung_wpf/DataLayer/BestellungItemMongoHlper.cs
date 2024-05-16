@@ -42,7 +42,8 @@ namespace bestellung_wpf.DataLayer
             return BestellungItem.CreateNewId(date, iItem);
         }
 
-        public BestellungItem GetLastItem(DateTime date) {
+        public BestellungItem GetLastItem(DateTime date)
+        {
             DateTime from = date.Date;
             DateTime to = date.AddDays(1).Date;
 
@@ -59,6 +60,15 @@ namespace bestellung_wpf.DataLayer
             }
 
             return null;
+        }
+
+        public List<BestellungItem> GetAllDocumentsSorted(string column)
+        {
+            SortDefinition<BestellungItem> sort = Builders<BestellungItem>.Sort.Descending(column);
+
+            List<BestellungItem> items = this.GetAllDocuments(sort);
+
+            return items;
         }
     }
 }

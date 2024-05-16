@@ -55,11 +55,20 @@ namespace bestellung_wpf.models
             IsValid = BestellungItemValidator.IsValid(this);
         }
 
+        internal bool HasLastEmpty()
+        {
+            if (articles.Count == 0) {
+                return false;
+            }
+
+            return articles[articles.Count - 1].IsEmpty();
+        }
+
         public string id { get { return _id; } set { _id = value; NotifyPropertyChanged(); } }
 
         public string customer { get { return _customer; } set { _customer = value; NotifyPropertyChanged(); } }
 
-        public void AddArticles(ArticleItemUi articleItemUi)
+        public void AddArticle(ArticleItemUi articleItemUi)
         {
             articleItemUi.PropertyChanged += ArticleItemUi_PropertyChanged;
             _articles.Add(articleItemUi);

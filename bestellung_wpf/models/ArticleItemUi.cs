@@ -35,6 +35,12 @@ namespace bestellung_wpf.models
             return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
         }
 
+        internal bool IsEmpty()
+        {
+            return name.Trim().Equals("") && manufacturer.Trim().Equals("") && articleNumber.Trim().Equals("") && partNumber.Trim().Equals("");
+        }
+
+
         public string getName()
         {
             return name;

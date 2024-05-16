@@ -76,7 +76,7 @@ namespace bestellung_wpf.views
         }
 
         public void ReloadData() {
-            List<BestellungItem> documentList = bestellungItemMongoHlper.GetAllDocuments();
+            List<BestellungItem> documentList = bestellungItemMongoHlper.GetAllDocumentsSorted("anfrageDate");
             bestellungItemObservable.List.Clear();
             for (int i = 0; i < documentList.Count; i++)
             {

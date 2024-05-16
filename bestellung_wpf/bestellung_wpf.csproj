@@ -117,6 +117,9 @@
     <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
     <Compile Include="DataLayer\IFindFluent.cs" />
     <Compile Include="enums\BestellungStatus.cs" />
+    <Compile Include="forms\BestellungChangeForm.xaml.cs">
+      <DependentUpon>BestellungChangeForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="forms\NewAnfrageForm.xaml.cs">
       <DependentUpon>NewAnfrageForm.xaml</DependentUpon>
     </Compile>
@@ -130,7 +133,12 @@
     <Compile Include="utils\FilterComboBox.cs" />
     <Compile Include="utils\GeneralUtils.cs" />
     <Compile Include="views\MainWindowView.cs" />
+    <Compile Include="views\BestellungChangeView.cs" />
     <Compile Include="views\NewAnfrageView.cs" />
+    <Page Include="forms\BestellungChangeForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="forms\NewAnfrageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

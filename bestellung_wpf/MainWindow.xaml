@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bestellung_wpf"
         xmlns:views="clr-namespace:bestellung_wpf.views" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="1800" Closed="Window_Closed"
+        Title="MainWindow" Height="950" Width="1900" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,7 +36,9 @@
             <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
         </Grid>
-        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" >
+        
+        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" FontSize="12" ContextMenuOpening="lstItems_ContextMenuOpening" >
+            
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />
@@ -52,6 +54,13 @@
                     <GridViewColumn Width="120" Header="Anzahlung" x:Name="anzahlungColumn" DisplayMemberBinding="{Binding anzahlung}" />
                     <GridViewColumn Width="120" Header="Offene-Betrag" x:Name="offeneBetragColumn" DisplayMemberBinding="{Binding offeneBetrag}" />
                     <GridViewColumn Width="100" Header="Status" x:Name="statusColumn" DisplayMemberBinding="{Binding status}" />
+                    <GridViewColumn Width="50" Header="..." x:Name="actionColumn">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="..." Width="35" Click="Button_Click" Tag="{Binding Mode=OneWay}" ></Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
                 </GridView>
             </ListView.View>

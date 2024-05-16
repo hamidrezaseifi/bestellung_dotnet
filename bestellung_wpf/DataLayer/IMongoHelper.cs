@@ -11,6 +11,8 @@ namespace bestellung_wpf.DataLayer
     {
         List<T> GetAllDocuments();
 
+        List<T> GetAllDocuments(SortDefinition<T> sort);
+
         List<T> GetFilteredDocuments(FilterDefinition<T> filter);
 
         List<T> GetFilteredDocuments(FilterDefinition<T> filter, SortDefinition<T> sort);

@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace bestellung_wpf.views
 {
-    public class NewAnfrageView : INotifyPropertyChanged
+    public class BestellungChangeView : INotifyPropertyChanged
     {
         private MainWindowView mainView;
 
@@ -21,32 +21,45 @@ namespace bestellung_wpf.views
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private bool CanUserAdd => _bestellungItem.articles.Count < 100;
+        private bool _CanUserAddRow;
+        public bool CanUserAddRow { get => _CanUserAddRow; set { 
+                _CanUserAddRow = value;
+                NotifyPropertyChanged(nameof(CanUserAddRow));
+            } 
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            if (!_bestellungItem.HasLastEmpty()) {
+                _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
+            }
         }
 
         private List<string> _customerList;
 
         private List<string> _fahrzeugList;
 
-        public NewAnfrageView(MainWindowView view) {
+        public BestellungChangeView(MainWindowView view, BestellungItemUi itemUi) {
             mainView = view;
-            _bestellungItem = new BestellungItemUi(bestellungItemMongoHlper.CreateNew(mainView.CurrentUser.name));
+            _bestellungItem = itemUi;
+            //_bestellungItem.articles.Add(new ArticleItemUi(new ArticleItem(true)));
 
             _customerList = bestellungItemMongoHlper.GetDistinct<string>("customer");
             _fahrzeugList = bestellungItemMongoHlper.GetDistinct<string>("fahrzeug");
 
-
-            for (int i = 1; i < 6; i++)
+            _bestellungItem.PropertyChanged += _bestellungItem_PropertyChanged;
+            if (!_bestellungItem.HasLastEmpty())
             {
-                ArticleItem articleItem = new ArticleItem(true);
-
-                ArticleItemUi articleItemUi = new ArticleItemUi(articleItem);
-                articleItemUi.index = i;
-                this.BestellungItem.AddArticle(articleItemUi);
+                _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
             }
+        }
 
+        private void _bestellungItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged();
         }
 
         public BestellungItemUi BestellungItem { get { return _bestellungItem; } set { _bestellungItem = value; NotifyPropertyChanged(); } }
@@ -54,5 +67,6 @@ namespace bestellung_wpf.views
         public List<String> CustomerList { get { return _customerList; }}
 
         public List<string> FahrzeugList { get => _fahrzeugList; set => _fahrzeugList = value; }
+        
     }
 }
