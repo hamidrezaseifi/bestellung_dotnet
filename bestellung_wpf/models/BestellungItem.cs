@@ -19,6 +19,41 @@ namespace bestellung_wpf.models
             this.user = _user;
             this.id = id;
         }
+
+        public BestellungItem(BestellungItemUi itemUi)
+        {
+            status = itemUi.status;
+            anfrageDate = itemUi.AnfrageDate;
+            user = itemUi.user;
+            id = itemUi.id;
+            _id = itemUi.DbId;
+
+            bestellungDate = itemUi.BestellungDate;
+
+            lieferungDate = itemUi.LieferungDate;
+
+            rueckgabeDate = itemUi.RueckgabeDate;
+
+            customer = itemUi.customer;
+
+            user = itemUi.user;
+
+            fahrzeug = itemUi.fahrzeug;
+
+            fahrgestellnummer = itemUi.fahrgestellnummer;
+
+            hsnTsn = itemUi.hsnTsn;
+
+            betrag = itemUi.betrag;
+
+            endBetrag = itemUi.endBetrag;
+
+            anzahlung = itemUi.anzahlung;
+
+            itemUi.articles.AsParallel().Where(a => ArticleItemValidator.IsValid(a)).ForAll(a => articles.Add(ArticleItem.fromUi(a)));
+
+        }
+
         [BsonId]
         public ObjectId _id { get; set; }
 

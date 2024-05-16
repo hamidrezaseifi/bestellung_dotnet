@@ -73,7 +73,7 @@ namespace bestellung_wpf
             if (form.IsSelected) {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                view.insertNewBestellung(form.BestellungItem);
+                view.InsertNewBestellung(form.BestellungItem);
             }
 
             

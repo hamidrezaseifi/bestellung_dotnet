@@ -68,7 +68,7 @@ namespace bestellung_wpf.views
         public User CurrentUser {
             get { return globalValues.CurrentUser; }
         }
-        public void insertNewBestellung(BestellungItemUi bestellungItem)
+        public void InsertNewBestellung(BestellungItemUi bestellungItem)
         {
             bestellungItemMongoHlper.InsertDocument(bestellungItem.prepare());
             

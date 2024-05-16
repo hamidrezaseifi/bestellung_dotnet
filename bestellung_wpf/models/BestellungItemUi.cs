@@ -1,4 +1,5 @@
 ﻿using bestellung_wpf.enums;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,13 +19,13 @@ namespace bestellung_wpf.models
 
         private string _id;
 
-        public DateTime _anfrageDate;
+        private DateTime _anfrageDate;
 
-        public DateTime _bestellungDate;
+        private DateTime _bestellungDate;
 
-        public DateTime _lieferungDate;
+        private DateTime _lieferungDate;
 
-        public DateTime _rueckgabeDate;
+        private DateTime _rueckgabeDate;
 
         private string _customer;
 
@@ -82,7 +83,12 @@ namespace bestellung_wpf.models
 
         public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
-       
+        public DateTime AnfrageDate { get => _anfrageDate; }
+        public DateTime BestellungDate { get => _bestellungDate; }
+        public DateTime LieferungDate { get => _lieferungDate; }
+        public DateTime RueckgabeDate { get => _rueckgabeDate; }
+
+
         public BestellungItemUi(BestellungItem item) {
             this._item1 = item;
 
@@ -136,10 +142,10 @@ namespace bestellung_wpf.models
             get {
                 String val = "";
 
-                val += "Anfrage: " + GetDateString(_anfrageDate) + "\r\n";
-                val += "Bestellung: " + GetDateString(_bestellungDate) + "\r\n";
-                val += "Lieferung: " + GetDateString(_lieferungDate) + "\r\n";
-                val += "Rückgabe: " + GetDateString(_rueckgabeDate) + "\r\n";
+                val += "Anfrage: " + GetDateString(AnfrageDate) + "\r\n";
+                val += "Bestellung: " + GetDateString(BestellungDate) + "\r\n";
+                val += "Lieferung: " + GetDateString(LieferungDate) + "\r\n";
+                val += "Rückgabe: " + GetDateString(RueckgabeDate) + "\r\n";
 
                 return val;
             }
@@ -170,10 +176,14 @@ namespace bestellung_wpf.models
             return date.ToShortDateString();
         }
 
+        public ObjectId DbId {
+            get { return _item1._id; }
+        }
+
         public BestellungItem prepare()
         {
 
-            BestellungItem item = (BestellungItem)this.MemberwiseClone();
+            BestellungItem item = this.ToItem();
 
             List<ArticleItem> filteredArticles = item.articles.Where(a => ArticleItemValidator.IsValid(a)).ToList();
 
@@ -183,6 +193,13 @@ namespace bestellung_wpf.models
             }
 
             item.articles = filteredArticles;
+
+            return item;
+        }
+
+        private BestellungItem ToItem()
+        {
+            BestellungItem item = new BestellungItem(this);
 
             return item;
         }
