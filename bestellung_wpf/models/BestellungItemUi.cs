@@ -215,7 +215,7 @@ namespace bestellung_wpf.models
             }
 
             item.articles = filteredArticles;
-
+            
             return item;
         }
 

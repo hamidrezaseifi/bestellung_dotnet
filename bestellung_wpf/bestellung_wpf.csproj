@@ -114,7 +114,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
+    <Compile Include="DataLayer\BestellungItemMongoHelper.cs" />
     <Compile Include="DataLayer\IFindFluent.cs" />
     <Compile Include="enums\BestellungChangeType.cs" />
     <Compile Include="enums\BestellungStatus.cs" />

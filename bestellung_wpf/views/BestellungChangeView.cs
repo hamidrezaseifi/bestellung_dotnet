@@ -20,7 +20,7 @@ namespace bestellung_wpf.views
 
         private readonly BestellungChangeType bestellungChangeType;
 
-        private BestellungItemMongoHlper bestellungItemMongoHlper = new BestellungItemMongoHlper();
+        private BestellungItemMongoHelper bestellungItemMongoHlper = new BestellungItemMongoHelper();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -59,6 +59,30 @@ namespace bestellung_wpf.views
             {
                 _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
             }
+        }
+
+        public void prepareItem()
+        {
+            BestellungStatus status = BestellungStatus.Anfrage;
+            if (bestellungChangeType == BestellungChangeType.Bestellen)
+            {
+                status = BestellungStatus.Bestellt;
+            }
+            if (bestellungChangeType == BestellungChangeType.Liefern)
+            {
+                status = BestellungStatus.Liefert;
+            }
+            if (bestellungChangeType == BestellungChangeType.Rueckgabe)
+            {
+                status = BestellungStatus.Rueckgabe;
+            }
+
+            foreach (ArticleItemUi articleItemUi in _bestellungItem.articles) {
+                if (articleItemUi.Selected) {
+                    articleItemUi.status = status;
+                }
+            }
+            _bestellungItem.status = status;
         }
 
         private void _bestellungItem_PropertyChanged(object sender, PropertyChangedEventArgs e)

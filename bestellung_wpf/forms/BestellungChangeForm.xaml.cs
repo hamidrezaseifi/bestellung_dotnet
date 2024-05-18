@@ -50,6 +50,8 @@ namespace bestellung_wpf.forms
             {
                 _isSelected = true;
 
+                _bestellungView.prepareItem();
+
                 Close();
             }
 

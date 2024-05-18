@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace bestellung_wpf.DataLayer
 {
-    public class BestellungItemMongoHlper : MongoHelper<BestellungItem>
+    public class BestellungItemMongoHelper : MongoHelper<BestellungItem>
     {
         protected override string GetCollectionName()
         {
@@ -47,7 +47,7 @@ namespace bestellung_wpf.DataLayer
             DateTime from = date.Date;
             DateTime to = date.AddDays(1).Date;
 
-            var builder = Builders<BestellungItem>.Filter;
+            FilterDefinitionBuilder<BestellungItem> builder = Builders<BestellungItem>.Filter;
 
 
             FilterDefinition<BestellungItem> filter = builder.Lt(f => f.anfrageDate, to) & builder.Gt(f => f.anfrageDate, from);
@@ -60,6 +60,14 @@ namespace bestellung_wpf.DataLayer
             }
 
             return null;
+        }
+
+        public void UpdateDocument(BestellungItem bestellungItem)
+        {
+            FilterDefinitionBuilder<BestellungItem> builder = Builders<BestellungItem>.Filter;
+
+            FilterDefinition<BestellungItem> filter = builder.Eq(f => f._id, bestellungItem._id);
+            base.UpdateDocument(filter, bestellungItem);
         }
 
         public List<BestellungItem> GetAllDocumentsSorted(string column)

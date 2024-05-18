@@ -1,4 +1,5 @@
 ﻿using bestellung_wpf.DataLayer;
+using bestellung_wpf.enums;
 using bestellung_wpf.models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace bestellung_wpf.views
 {
     public class MainWindowView
     {
-        private BestellungItemMongoHlper bestellungItemMongoHlper = new BestellungItemMongoHlper();
+        private BestellungItemMongoHelper bestellungItemMongoHlper = new BestellungItemMongoHelper();
 
         private GlobalValues globalValues;
 
@@ -48,6 +49,13 @@ namespace bestellung_wpf.views
 
             }
             
+        }
+
+        internal void UpdateBestellung(BestellungItemUi bestellungItem)
+        {
+            bestellungItemMongoHlper.UpdateDocument(bestellungItem.prepare());
+
+            ReloadData();
         }
     }
 }

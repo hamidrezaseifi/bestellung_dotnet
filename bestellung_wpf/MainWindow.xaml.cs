@@ -94,7 +94,7 @@ namespace bestellung_wpf
             {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                //view.InsertNewBestellung(form.BestellungItem);
+                view.UpdateBestellung(form.BestellungItem);
             }
         }
 
@@ -102,13 +102,33 @@ namespace bestellung_wpf
         {
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
-            
+
+            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Liefern);
+            form.ShowDialog();
+
+            if (form.IsSelected)
+            {
+                BestellungItemUi selcted = form.BestellungItem;
+
+                view.UpdateBestellung(form.BestellungItem);
+            }
+
         }
 
         private void miRueckgabe_Click(object sender, RoutedEventArgs e)
         {
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
+
+            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Rueckgabe);
+            form.ShowDialog();
+
+            if (form.IsSelected)
+            {
+                BestellungItemUi selcted = form.BestellungItem;
+
+                view.UpdateBestellung(form.BestellungItem);
+            }
 
         }
 
@@ -129,21 +149,16 @@ namespace bestellung_wpf
         private void ShowContextMenu(Control ctrl, BestellungItemUi item) {
             if (mnuItems == null) {
                 mnuItems = new ContextMenu();
+
+            }
+
+            mnuItems.Items.Clear();
+
+            if (item.status == BestellungStatus.Anfrage)
+            {
                 MenuItem menuItem = new MenuItem();
                 menuItem.Header = "Bestellen";
                 menuItem.Click += miBestellen_Click;
-
-                mnuItems.Items.Add(menuItem);
-
-                menuItem = new MenuItem();
-                menuItem.Header = "Liefern";
-                menuItem.Click += miLiefern_Click;
-
-                mnuItems.Items.Add(menuItem);
-
-                menuItem = new MenuItem();
-                menuItem.Header = "Rückgabe";
-                menuItem.Click += miRueckgabe_Click;
 
                 mnuItems.Items.Add(menuItem);
                 mnuItems.Items.Add(new Separator());
@@ -151,6 +166,26 @@ namespace bestellung_wpf
                 menuItem = new MenuItem();
                 menuItem.Header = "Löschen";
                 menuItem.Click += miLoeschen_Click;
+
+                mnuItems.Items.Add(menuItem);
+            }
+
+            if (item.status == BestellungStatus.Bestellt)
+            {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = "Liefern";
+                menuItem.Click += miLiefern_Click;
+
+                mnuItems.Items.Add(menuItem);
+            }
+
+            if (item.status == BestellungStatus.Liefert)
+            {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = "Rückgabe";
+                menuItem.Click += miRueckgabe_Click;
+
+                mnuItems.Items.Add(menuItem);
             }
 
             mnuItems.PlacementTarget = ctrl;

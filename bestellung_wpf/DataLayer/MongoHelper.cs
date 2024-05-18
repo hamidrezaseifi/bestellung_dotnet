@@ -75,6 +75,13 @@ namespace bestellung_wpf.DataLayer
             database.GetCollection<T>(GetCollectionName()).UpdateOne(filter, document);
         }
 
+        public void UpdateDocument(FilterDefinition<T> filter, T document)
+        {
+            IMongoDatabase database = GetDatabase();
+            ReplaceOneResult res = database.GetCollection<T>(GetCollectionName()).ReplaceOne(filter, document);
+            long l = res.MatchedCount;
+        }
+
         public List<S> GetDistinct<S>(String column)
         {
             IMongoDatabase database = GetDatabase();

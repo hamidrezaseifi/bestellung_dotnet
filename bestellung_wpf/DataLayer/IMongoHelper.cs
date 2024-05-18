@@ -21,6 +21,8 @@ namespace bestellung_wpf.DataLayer
 
         void UpdateDocument(FilterDefinition<T> filter, UpdateDefinition<T> document);
 
+        void UpdateDocument(FilterDefinition<T> filter, T document);
+
         void DeleteDocuments(FilterDefinition<T> filter);
 
         List<S> GetDistinct<S>(String column);

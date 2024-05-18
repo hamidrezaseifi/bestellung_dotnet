@@ -17,7 +17,7 @@ namespace bestellung_wpf.views
 
         private BestellungItemUi _bestellungItem;
 
-        private BestellungItemMongoHlper bestellungItemMongoHlper = new BestellungItemMongoHlper();
+        private BestellungItemMongoHelper bestellungItemMongoHlper = new BestellungItemMongoHelper();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
