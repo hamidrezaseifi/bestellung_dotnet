@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bestellung_wpf.forms"
         xmlns:utils="clr-namespace:bestellung_wpf.utils" x:Name="window"
         mc:Ignorable="d"
-        Title="Bestellung ..." Height="450" Width="850" WindowStartupLocation="CenterOwner" DataContext="{Binding BestellungView, RelativeSource={RelativeSource Self}}">
+        Title="{Binding BestellungView.Title, ElementName=window, Mode=OneWay}" Height="450" Width="910" WindowStartupLocation="CenterOwner" DataContext="{Binding BestellungView, RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid Margin="0,0,10,0">
             <Grid.ColumnDefinitions>
@@ -39,12 +39,24 @@
 
             <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" >
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="..." Binding="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="40" />
+                    
+                    <DataGridTemplateColumn Header="..." CanUserSort="False" CanUserReorder="False" Width="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <CheckBox  IsChecked="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnable, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    
                     <DataGridTextColumn Header="Name" Binding="{Binding name, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
                     <DataGridTextColumn Header="Kauf-Quelle" Binding="{Binding purchaseSource, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
                     <DataGridTextColumn Header="Marke" Binding="{Binding manufacturer, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
                     <DataGridTextColumn Header="ArticleNumber" Binding="{Binding articleNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="Preis" Binding="{Binding price, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
+                    <DataGridTextColumn Header="Preis" Binding="{Binding price, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="100" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding status, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
 
                 </DataGrid.Columns>
             </DataGrid>

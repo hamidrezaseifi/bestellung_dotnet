@@ -24,6 +24,7 @@ namespace bestellung_wpf.views
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         private bool CanUserAdd => _bestellungItem.articles.Count < 100;
         private bool _CanUserAddRow;
         public bool CanUserAddRow { get => _CanUserAddRow; set { 
@@ -35,10 +36,15 @@ namespace bestellung_wpf.views
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            if (!_bestellungItem.HasLastEmpty()) {
-                _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
+            if (bestellungChangeType == BestellungChangeType.NewAnfrage || bestellungChangeType == BestellungChangeType.Bestellen)
+            {
+                if (!_bestellungItem.HasLastEmpty())
+                {
+                    _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
+                }
             }
+
+           
         }
 
         private List<string> _customerList;
@@ -49,16 +55,58 @@ namespace bestellung_wpf.views
             bestellungChangeType = _bestellungChangeType;
             mainView = view;
             _bestellungItem = itemUi;
+
+            foreach(ArticleItemUi articleItemUi in itemUi.articles) { 
+                if (_bestellungChangeType == BestellungChangeType.NewAnfrage)
+                {
+                    articleItemUi.IsEnable = true;
+                }
+                if (_bestellungChangeType == BestellungChangeType.Bestellen)
+                {
+                    articleItemUi.IsEnable = true;
+                }
+                if (_bestellungChangeType == BestellungChangeType.Liefern)
+                {
+                    articleItemUi.IsEnable = articleItemUi.status == BestellungStatus.Bestellt;
+                }
+                if (_bestellungChangeType == BestellungChangeType.Rueckgabe)
+                {
+                    articleItemUi.IsEnable = articleItemUi.status == BestellungStatus.Liefert;
+                }
+                //articleItemUi.IsEnable = false;
+            }
             //_bestellungItem.articles.Add(new ArticleItemUi(new ArticleItem(true)));
 
             _customerList = bestellungItemMongoHlper.GetDistinct<string>("customer");
             _fahrzeugList = bestellungItemMongoHlper.GetDistinct<string>("fahrzeug");
 
             _bestellungItem.PropertyChanged += _bestellungItem_PropertyChanged;
-            if (!_bestellungItem.HasLastEmpty())
-            {
-                _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
+            if (_bestellungChangeType == BestellungChangeType.NewAnfrage || _bestellungChangeType == BestellungChangeType.Bestellen) {
+                if (!_bestellungItem.HasLastEmpty())
+                {
+                    _bestellungItem.AddArticle(new ArticleItemUi(new ArticleItem(true)));
+                }
             }
+                
+            itemUi.IsValid = true;
+        }
+
+        public bool IsArticleSelected
+        {
+            get
+            {
+                return _bestellungItem.articles.AsParallel().Where(a => a.Selected).Count() > 0;
+            }
+
+        }
+
+        public bool CanClose
+        {
+            get
+            {
+                return IsArticleSelected && BestellungItemValidator.IsValid(_bestellungItem);
+            }
+
         }
 
         public void prepareItem()
@@ -95,6 +143,24 @@ namespace bestellung_wpf.views
         public List<String> CustomerList { get { return _customerList; }}
 
         public List<string> FahrzeugList { get => _fahrzeugList; set => _fahrzeugList = value; }
-        
+
+        public string Title { 
+            get {
+                if (bestellungChangeType == BestellungChangeType.Bestellen)
+                {
+                    return "Anfrage Bestellen ...";
+                }
+                if (bestellungChangeType == BestellungChangeType.Liefern)
+                {
+                    return "Bestellung liefern ...";
+                }
+                if (bestellungChangeType == BestellungChangeType.Rueckgabe)
+                {
+                    return "Bestellung Rückgeben ...";
+                }
+
+                return " üngultig!!!!!! ";
+            }
+        }
     }
 }

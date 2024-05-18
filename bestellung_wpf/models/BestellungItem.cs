@@ -26,7 +26,7 @@ namespace bestellung_wpf.models
             anfrageDate = itemUi.AnfrageDate;
             user = itemUi.user;
             id = itemUi.id;
-            _id = itemUi.DbId;
+            _id = itemUi.GetDbId();
 
             bestellungDate = itemUi.BestellungDate;
 

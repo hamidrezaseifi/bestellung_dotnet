@@ -14,9 +14,10 @@ namespace bestellung_wpf.models
 {
     public class BestellungItemUi: INotifyPropertyChanged
     {
-        private BestellungItem _item1;
+        private BestellungItem _item;
         private ObservableCollection<ArticleItemUi> _articles;
         private bool _isValid = false;
+        private bool _canNewArticle = true;
 
         private string _id;
 
@@ -100,7 +101,7 @@ namespace bestellung_wpf.models
 
 
         public BestellungItemUi(BestellungItem item) {
-            this._item1 = item;
+            this._item = item;
 
             this._id = item.id;
             this._bestellungDate = item.bestellungDate;
@@ -174,22 +175,29 @@ namespace bestellung_wpf.models
         }
 
         //public BestellungItem Item { get => _item; set => _item = value; }
-        public bool IsValid { get { 
-                return _isValid; 
-            } 
+        public bool IsValid
+        {
+            get
+            {
+                return _isValid;
+            }
             set
             {
                 bool raiseChange = false;
-                if (_isValid != value) {
+                if (_isValid != value)
+                {
                     raiseChange = true;
                 }
                 _isValid = value;
-                if (raiseChange) {
+                if (raiseChange)
+                {
                     NotifyPropertyChanged("IsValid");
                 }
-                
+
             }
         }
+
+        public bool CanNewArticle { get => _canNewArticle; set => _canNewArticle = value; }
 
         private string GetDateString(DateTime date) {
             if (date == null) {
@@ -198,8 +206,8 @@ namespace bestellung_wpf.models
             return date.ToShortDateString();
         }
 
-        public ObjectId DbId {
-            get { return _item1._id; }
+        public ObjectId GetDbId() {
+            return _item._id; 
         }
 
         public BestellungItem prepare()
@@ -219,7 +227,7 @@ namespace bestellung_wpf.models
             return item;
         }
 
-        private BestellungItem ToItem()
+        public BestellungItem ToItem()
         {
             BestellungItem item = new BestellungItem(this);
 

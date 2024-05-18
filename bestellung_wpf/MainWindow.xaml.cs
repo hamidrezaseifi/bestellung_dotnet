@@ -1,6 +1,7 @@
 ﻿using bestellung_wpf.enums;
 using bestellung_wpf.forms;
 using bestellung_wpf.models;
+using bestellung_wpf.utils;
 using bestellung_wpf.views;
 using System;
 using System.Collections.Generic;
@@ -87,7 +88,7 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Bestellen);
+            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Bestellen);
             form.ShowDialog();
 
             if (form.IsSelected)
@@ -103,7 +104,7 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Liefern);
+            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Liefern);
             form.ShowDialog();
 
             if (form.IsSelected)
@@ -120,7 +121,7 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Rueckgabe);
+            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Rueckgabe);
             form.ShowDialog();
 
             if (form.IsSelected)
