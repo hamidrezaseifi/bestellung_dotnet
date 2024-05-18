@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bestellung_wpf.enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace bestellung_wpf.models
     {
         private ArticleItem _item;
 
+        private bool _selected = false;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -23,21 +26,24 @@ namespace bestellung_wpf.models
         public string name { get { return _item.name; } set { _item.name = value; NotifyPropertyChanged(); } }
         public string manufacturer { get { return _item.manufacturer; } set { _item.manufacturer = value; NotifyPropertyChanged(); } }
         public string articleNumber { get { return _item.articleNumber; } set { _item.articleNumber = value; NotifyPropertyChanged(); } }
-        public string partNumber { get { return _item.partNumber; } set { _item.partNumber = value; NotifyPropertyChanged(); } }
-        public string status { get { return _item.status; } set { _item.status = value; NotifyPropertyChanged(); } }
+        public string purchaseSource { get { return _item.purchaseSource; } set { _item.purchaseSource = value; NotifyPropertyChanged(); } }
+        public double price { get { return _item.price; } set { _item.price = value; NotifyPropertyChanged(); } }
+
+        public BestellungStatus status { get { return _item.status; } set { _item.status = value; NotifyPropertyChanged(); } }
         public ArticleItem Item { get => _item; set => _item = value; }
+        public bool Selected { get => _selected; set => _selected = value; }
 
         public ArticleItemUi(ArticleItem item) {
             _item = item;
         }
         public override string ToString()
         {
-            return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
+            return name + " Kauf-Q.(" + purchaseSource + ") Marke(" + manufacturer + ") Art-Num.(" + articleNumber + "): " + status;
         }
 
         internal bool IsEmpty()
         {
-            return name.Trim().Equals("") && manufacturer.Trim().Equals("") && articleNumber.Trim().Equals("") && partNumber.Trim().Equals("");
+            return name.Trim().Equals("") && manufacturer.Trim().Equals("") && articleNumber.Trim().Equals("") && purchaseSource.Trim().Equals("");
         }
 
 
@@ -56,12 +62,17 @@ namespace bestellung_wpf.models
             return articleNumber;
         }
 
-        public string getPartNumber()
+        public string getPurchaseSource()
         {
-            return partNumber;
+            return purchaseSource;
         }
 
-        public string getStatus()
+        public double getPrice()
+        {
+            return price;
+        }
+
+        public BestellungStatus getStatus()
         {
             return status;
         }

@@ -1,4 +1,5 @@
 ﻿using bestellung_wpf.enums;
+using bestellung_wpf.utils;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -142,6 +143,9 @@ namespace bestellung_wpf.models
                 {
                     val += item.ToString() + "\r\n";
                 }
+                if (val.EndsWith("\r\n")) {
+                    val = val.Substring(0, val.Length - 2);
+                }
                 return val; 
             } 
         }
@@ -151,10 +155,19 @@ namespace bestellung_wpf.models
             get {
                 String val = "";
 
-                val += "Anfrage: " + GetDateString(AnfrageDate) + "\r\n";
-                val += "Bestellung: " + GetDateString(BestellungDate) + "\r\n";
-                val += "Lieferung: " + GetDateString(LieferungDate) + "\r\n";
-                val += "Rückgabe: " + GetDateString(RueckgabeDate) + "\r\n";
+                val += "Anfrage: " + GetDateString(AnfrageDate);
+                if (GeneralUtils.isDateTimeValid(BestellungDate))
+                {
+                    val += "\r\nBestellung: " + GetDateString(BestellungDate);
+                }
+                if (GeneralUtils.isDateTimeValid(LieferungDate))
+                {
+                    val += "\r\nLieferung: " + GetDateString(LieferungDate);
+                }
+                if (GeneralUtils.isDateTimeValid(RueckgabeDate))
+                {
+                    val += "\r\nRückgabe: " + GetDateString(RueckgabeDate);
+                }
 
                 return val;
             }

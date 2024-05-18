@@ -12,8 +12,7 @@ namespace bestellung_wpf.utils
 {
     class GeneralUtils
     {
-        
-       
+
         public static void isNumberOrDecimal(object sender, TextCompositionEventArgs e) {
             bool approvedDecimalPoint = false;
 
@@ -25,6 +24,10 @@ namespace bestellung_wpf.utils
 
             if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
                 e.Handled = true;
+        }
+
+        public static bool isDateTimeValid(DateTime dateTime) {
+            return dateTime > new DateTime(2024, 1, 1);
         }
     }
 }

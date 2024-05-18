@@ -39,11 +39,12 @@
 
             <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="..." Binding="{Binding index}" CanUserSort="False" CanUserReorder="False" IsReadOnly="True" Width="40" />
+                    <DataGridCheckBoxColumn Header="..." Binding="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="40" />
                     <DataGridTextColumn Header="Name" Binding="{Binding name, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
+                    <DataGridTextColumn Header="Kauf-Quelle" Binding="{Binding purchaseSource, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
                     <DataGridTextColumn Header="Marke" Binding="{Binding manufacturer, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
                     <DataGridTextColumn Header="ArticleNumber" Binding="{Binding articleNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="PartNumber" Binding="{Binding partNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
+                    <DataGridTextColumn Header="Preis" Binding="{Binding price, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
 
                 </DataGrid.Columns>
             </DataGrid>

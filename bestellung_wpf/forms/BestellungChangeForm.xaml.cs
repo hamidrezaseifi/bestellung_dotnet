@@ -1,4 +1,5 @@
-﻿using bestellung_wpf.models;
+﻿using bestellung_wpf.enums;
+using bestellung_wpf.models;
 using bestellung_wpf.views;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,9 @@ namespace bestellung_wpf.forms
 
         private bool _isSelected = false;
 
-        public BestellungChangeForm(MainWindowView view, Window owner, BestellungItemUi itemUi)
+        public BestellungChangeForm(MainWindowView view, Window owner, BestellungItemUi itemUi, BestellungChangeType _bestellungChangeType)
         {
-            _bestellungView = new BestellungChangeView(view, itemUi);
+            _bestellungView = new BestellungChangeView(view, itemUi, _bestellungChangeType);
 
             Owner = owner;
 

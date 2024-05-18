@@ -1,4 +1,5 @@
 ﻿using bestellung_wpf.DataLayer;
+using bestellung_wpf.enums;
 using bestellung_wpf.models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace bestellung_wpf.views
         private MainWindowView mainView;
 
         private BestellungItemUi _bestellungItem;
+
+        private readonly BestellungChangeType bestellungChangeType;
 
         private BestellungItemMongoHlper bestellungItemMongoHlper = new BestellungItemMongoHlper();
 
@@ -42,7 +45,8 @@ namespace bestellung_wpf.views
 
         private List<string> _fahrzeugList;
 
-        public BestellungChangeView(MainWindowView view, BestellungItemUi itemUi) {
+        public BestellungChangeView(MainWindowView view, BestellungItemUi itemUi, BestellungChangeType _bestellungChangeType) {
+            bestellungChangeType = _bestellungChangeType;
             mainView = view;
             _bestellungItem = itemUi;
             //_bestellungItem.articles.Add(new ArticleItemUi(new ArticleItem(true)));

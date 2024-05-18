@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bestellung_wpf.enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,9 @@ namespace bestellung_wpf.models
         string getName();
         string getManufacturer();
         string getArticleNumber();
-        string getPartNumber();
-        string getStatus();
+        string getPurchaseSource();
+        double getPrice();
+        BestellungStatus getStatus();
     }
 
     public class ArticleItemValidator : ValidatorBase
@@ -34,7 +36,7 @@ namespace bestellung_wpf.models
                 return false;
             }
 
-            if (!IsValueValid(articleItem.getPartNumber()))
+            if (!IsValueValid(articleItem.getPurchaseSource()))
             {
                 return false;
             }

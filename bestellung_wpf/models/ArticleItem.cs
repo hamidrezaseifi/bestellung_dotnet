@@ -12,7 +12,7 @@ namespace bestellung_wpf.models
         
         public ArticleItem()
         {
-            status = BestellungStatus.Anfrage.ToString();
+            status = BestellungStatus.Anfrage;
         }
 
         public ArticleItem(bool initString): this()
@@ -20,8 +20,9 @@ namespace bestellung_wpf.models
             name = "";
             manufacturer = "";
             articleNumber = "";
-            partNumber = "";
-            
+            purchaseSource = "";
+            status = BestellungStatus.Anfrage;
+            price = 0;
         }
 
         public static ArticleItem fromUi(ArticleItemUi uiItem)
@@ -31,8 +32,9 @@ namespace bestellung_wpf.models
             item.name = uiItem.name;
             item.manufacturer = uiItem.manufacturer;
             item.articleNumber = uiItem.articleNumber;
-            item.partNumber = uiItem.partNumber;
+            item.purchaseSource = uiItem.purchaseSource;
             item.status = uiItem.status;
+            item.price = uiItem.price;
 
             return item;
         }
@@ -40,12 +42,9 @@ namespace bestellung_wpf.models
         public string name { get; set; }
         public string manufacturer { get; set; }
         public string articleNumber { get; set; }
-        public string partNumber { get; set; }
-        public string status { get; set; }
-
-        public override string ToString() {
-            return name + " Marke(" + manufacturer + ") Artikelnummer(" + articleNumber + ") Partnummer(" + partNumber + ") Status(" + status + ")";
-        }
+        public string purchaseSource { get; set; }
+        public double price { get; set; }
+        public BestellungStatus status { get; set; }
 
         public string getName()
         {
@@ -62,12 +61,17 @@ namespace bestellung_wpf.models
             return articleNumber;
         }
 
-        public string getPartNumber()
+        public string getPurchaseSource()
         {
-            return partNumber;
+            return purchaseSource;
         }
 
-        public string getStatus()
+        public double getPrice() {
+            return price;
+        }
+
+
+        public BestellungStatus getStatus()
         {
             return status;
         }

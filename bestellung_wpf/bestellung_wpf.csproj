@@ -116,6 +116,7 @@
     </ApplicationDefinition>
     <Compile Include="DataLayer\BestellungItemMongoHlper.cs" />
     <Compile Include="DataLayer\IFindFluent.cs" />
+    <Compile Include="enums\BestellungChangeType.cs" />
     <Compile Include="enums\BestellungStatus.cs" />
     <Compile Include="forms\BestellungChangeForm.xaml.cs">
       <DependentUpon>BestellungChangeForm.xaml</DependentUpon>

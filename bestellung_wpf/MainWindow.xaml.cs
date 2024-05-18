@@ -1,4 +1,5 @@
-﻿using bestellung_wpf.forms;
+﻿using bestellung_wpf.enums;
+using bestellung_wpf.forms;
 using bestellung_wpf.models;
 using bestellung_wpf.views;
 using System;
@@ -86,7 +87,7 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, item);
+            BestellungChangeForm form = new BestellungChangeForm(view, this, item, BestellungChangeType.Bestellen);
             form.ShowDialog();
 
             if (form.IsSelected)
