@@ -23,11 +23,13 @@ namespace bestellung_wpf.models
         public BestellungItem(BestellungItemUi itemUi)
         {
             status = itemUi.status;
-            anfrageDate = itemUi.AnfrageDate;
-            user = itemUi.user;
+            
             id = itemUi.id;
+            
             _id = itemUi.GetDbId();
 
+            anfrageDate = itemUi.AnfrageDate;
+            
             bestellungDate = itemUi.BestellungDate;
 
             lieferungDate = itemUi.LieferungDate;
@@ -77,11 +79,11 @@ namespace bestellung_wpf.models
 
         public string hsnTsn{ get; set; }
 
-        public double betrag{ get; set; }
+        public decimal betrag { get; set; }
 
-        public double endBetrag{ get; set; }
+        public decimal endBetrag{ get; set; }
 
-        public double anzahlung{ get; set; }
+        public decimal anzahlung { get; set; }
 
         public BestellungStatus status { get; set; }
 

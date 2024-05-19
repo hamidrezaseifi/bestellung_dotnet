@@ -39,11 +39,13 @@ namespace bestellung_wpf.models
 
         private string _hsnTsn;
 
-        private double _betrag;
+        private decimal _betrag;
 
-        private double _endBetrag;
+        private decimal _endBetrag;
 
-        private double _anzahlung;
+        private decimal _anzahlung;
+
+        private decimal _offeneBetrag;
 
         private BestellungStatus _status;
 
@@ -55,6 +57,7 @@ namespace bestellung_wpf.models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             IsValid = BestellungItemValidator.IsValid(this);
+            offeneBetrag = endBetrag - anzahlung;
         }
 
         internal bool HasLastEmpty()
@@ -84,20 +87,30 @@ namespace bestellung_wpf.models
 
         public string hsnTsn { get { return _hsnTsn; } set { _hsnTsn = value; NotifyPropertyChanged(); } }
 
-        public double betrag { get { return _betrag; } set { _betrag = value; NotifyPropertyChanged(); } }
+        public decimal betrag { get { return _betrag; } set { _betrag = value; NotifyPropertyChanged(); } }
 
-        public double endBetrag { get { return _endBetrag; } set { _endBetrag = value; NotifyPropertyChanged(); } }
+        public decimal endBetrag { get { return _endBetrag; } 
+            set { 
+                _endBetrag = value; 
+                NotifyPropertyChanged();
+            } }
 
-        public double anzahlung { get { return _anzahlung; } set { _anzahlung = value; NotifyPropertyChanged(); } }
+        public decimal anzahlung { get { return _anzahlung; } 
+            set { 
+                _anzahlung = value; 
+                NotifyPropertyChanged(); 
+            } 
+        }
+
+        public decimal offeneBetrag { get { return _offeneBetrag; } set { _offeneBetrag = value;  } }
 
         public BestellungStatus status { get { return _status; } set { _status = value; NotifyPropertyChanged(); } }
 
-        public double offeneBetrag { get { return endBetrag - anzahlung; } }
 
-        public DateTime AnfrageDate { get => _anfrageDate; }
-        public DateTime BestellungDate { get => _bestellungDate; }
-        public DateTime LieferungDate { get => _lieferungDate; }
-        public DateTime RueckgabeDate { get => _rueckgabeDate; }
+        public DateTime AnfrageDate { get => _anfrageDate; set { _anfrageDate = value; } }
+        public DateTime BestellungDate { get => _bestellungDate; set { _bestellungDate = value; } }
+        public DateTime LieferungDate { get => _lieferungDate; set { _lieferungDate = value; } }
+        public DateTime RueckgabeDate { get => _rueckgabeDate; set { _rueckgabeDate = value; } }
 
 
         public BestellungItemUi(BestellungItem item) {

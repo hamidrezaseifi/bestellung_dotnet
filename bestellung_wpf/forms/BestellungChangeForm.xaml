@@ -20,6 +20,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
@@ -33,29 +34,77 @@
             <Label Content="HSN/TSN" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" />
             <utils:CustomeTextBox x:Name="txtHsnTsh" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.hsnTsn, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="4" />
             <Label Content="Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtBetrag" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.betrag, ElementName=window}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="5" />
+            <utils:CustomeTextBox x:Name="txtBetrag" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.betrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="5" />
             <Label Content="End-Betrag" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.endBetrag, ElementName=window}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="6" />
+            <utils:CustomeTextBox x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.endBetrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
+            <Label Content="Anzahlung" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+            <utils:CustomeTextBox x:Name="txtAnzahlung" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.anzahlung, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
+            <Label Content="Öffene-Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" />
+            <utils:CustomeTextBox x:Name="txtOffeneBetrag" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" IsReadOnly="False" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.offeneBetrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
 
-            <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" >
+            <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Bottom" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" Height="291" Grid.RowSpan="2" >
                 <DataGrid.Columns>
-                    
+
                     <DataGridTemplateColumn Header="..." CanUserSort="False" CanUserReorder="False" Width="40">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <CheckBox  IsChecked="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnable, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <CheckBox IsChecked="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnable, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
-                    
-                    <DataGridTextColumn Header="Name" Binding="{Binding name, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="Kauf-Quelle" Binding="{Binding purchaseSource, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="Marke" Binding="{Binding manufacturer, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="ArticleNumber" Binding="{Binding articleNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="150" />
-                    <DataGridTextColumn Header="Preis" Binding="{Binding price, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" CanUserSort="False" CanUserReorder="False" Width="100" />
+
+                    <DataGridTemplateColumn Header="Name" CanUserSort="False" CanUserReorder="False" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBox Text="{Binding name, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" BorderBrush="{x:Null}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Kauf-Quelle" CanUserSort="False" CanUserReorder="False" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBox Text="{Binding purchaseSource, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" BorderBrush="{x:Null}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Marke" CanUserSort="False" CanUserReorder="False" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBox Text="{Binding manufacturer, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" BorderBrush="{x:Null}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="ArticleNumber" CanUserSort="False" CanUserReorder="False" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBox Text="{Binding articleNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" BorderBrush="{x:Null}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Preis" CanUserSort="False" CanUserReorder="False" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <utils:CustomeTextBox Text="{Binding price, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" BorderBrush="{x:Null}" IsNumber="True"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTextColumn Header="Status" Binding="{Binding status, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
 
                 </DataGrid.Columns>

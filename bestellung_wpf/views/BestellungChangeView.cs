@@ -33,6 +33,17 @@ namespace bestellung_wpf.views
             } 
         }
 
+        public bool ArticleIsEditable
+        {
+            get {
+                if (_bestellungItem.status == BestellungStatus.Anfrage) {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -115,14 +126,17 @@ namespace bestellung_wpf.views
             if (bestellungChangeType == BestellungChangeType.Bestellen)
             {
                 status = BestellungStatus.Bestellt;
+                _bestellungItem.BestellungDate = DateTime.Now;
             }
             if (bestellungChangeType == BestellungChangeType.Liefern)
             {
                 status = BestellungStatus.Liefert;
+                _bestellungItem.LieferungDate = DateTime.Now;
             }
             if (bestellungChangeType == BestellungChangeType.Rueckgabe)
             {
                 status = BestellungStatus.Rueckgabe;
+                _bestellungItem.RueckgabeDate = DateTime.Now;
             }
 
             foreach (ArticleItemUi articleItemUi in _bestellungItem.articles) {

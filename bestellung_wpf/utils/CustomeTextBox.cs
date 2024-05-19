@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace bestellung_wpf.utils
@@ -11,15 +12,23 @@ namespace bestellung_wpf.utils
     {
         private bool _isNumber = false;
         private bool _selectOnFocus = false;
+        
 
         public CustomeTextBox() {
 
             this.PreviewTextInput += CustomeTextBox_PreviewTextInput;
             this.GotFocus += CustomeTextBox_GotFocus;
+            this.TextChanged += CustomeTextBox_TextChanged;
+        }
+
+        private void CustomeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
 
         public bool IsNumber { get => _isNumber; set => _isNumber = value; }
         public bool SelectOnFocus { get => _selectOnFocus; set => _selectOnFocus = value; }
+       
 
         private void CustomeTextBox_GotFocus(object sender, System.Windows.RoutedEventArgs e)
         {
