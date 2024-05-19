@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bestellung_wpf"
-        xmlns:views="clr-namespace:bestellung_wpf.views" x:Class="bestellung_wpf.MainWindow"
+        xmlns:views="clr-namespace:bestellung_wpf.views" x:Name="window" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="950" Width="1900" Closed="Window_Closed"
-        WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14">
+        WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14" DataContext="{Binding MainView, ElementName=window}">
+    <Window.Resources>  
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -31,14 +34,14 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="btnAnfrage" Content="Anfrage" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Width="100" Height="30"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnAnfrage_Click" />
+            <Button x:Name="btnAnfrage" Content="Neue Anfrage" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Width="100" Height="30"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnAnfrage_Click" />
             <Label x:Name="lblBenutzer" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Grid.Column="3" Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
             <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
         </Grid>
-        
-        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" FontSize="12" ContextMenuOpening="lstItems_ContextMenuOpening" >
-            
+
+        <ListView x:Name="lstItems" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Stretch" FontSize="12" ContextMenuOpening="lstItems_ContextMenuOpening" DataContext="{Binding MainView.bestellungItemObservable.List, ElementName=window}" >
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="..." x:Name="indexColumn" DisplayMemberBinding="{Binding id}" />

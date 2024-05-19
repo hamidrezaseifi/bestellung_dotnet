@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -112,12 +113,10 @@ namespace bestellung_wpf.models
 
         public BestellungStatus status { get { return _status; } set { _status = value; NotifyPropertyChanged(); } }
 
-
         public DateTime AnfrageDate { get => _anfrageDate; set { _anfrageDate = value; } }
         public DateTime BestellungDate { get => _bestellungDate; set { _bestellungDate = value; } }
         public DateTime LieferungDate { get => _lieferungDate; set { _lieferungDate = value; } }
         public DateTime RueckgabeDate { get => _rueckgabeDate; set { _rueckgabeDate = value; } }
-
 
         public BestellungItemUi(BestellungItem item) {
             this._item = item;

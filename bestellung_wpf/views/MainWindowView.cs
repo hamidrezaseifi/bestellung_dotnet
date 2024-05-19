@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace bestellung_wpf.views
 {
@@ -15,6 +16,12 @@ namespace bestellung_wpf.views
         private BestellungItemMongoHelper bestellungItemMongoHlper = new BestellungItemMongoHelper();
 
         private GlobalValues globalValues;
+
+        private Color _anfrageBackground = Color.FromRgb(230, 230, 255);
+        private Color _bestelltBackground = Color.FromRgb(230, 255, 230);
+        private Color _liefertBackground = Color.FromRgb(230, 230, 230);
+        private Color _rueckgabeBackground = Color.FromRgb(255, 230, 230);
+
 
         public BestellungItemCollection bestellungItemObservable { get; set; }
 
@@ -29,10 +36,16 @@ namespace bestellung_wpf.views
             ReloadData();
 
         }
-
+        
         public User CurrentUser {
             get { return globalValues.CurrentUser; }
         }
+
+        public Brush AnfrageBackgroundBrush { get => new SolidColorBrush(_anfrageBackground); }
+        public Brush BestelltBackgroundBrush { get => new SolidColorBrush(_bestelltBackground); }
+        public Brush LiefertBackgroundBrush { get => new SolidColorBrush(_liefertBackground); }
+        public Brush RueckgabeBackgroundBrush{ get => new SolidColorBrush(_rueckgabeBackground); }
+
         public void InsertNewBestellung(BestellungItemUi bestellungItem)
         {
             bestellungItemMongoHlper.InsertDocument(bestellungItem.prepare());

@@ -25,9 +25,11 @@ namespace bestellung_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowView view = new MainWindowView();
+        private MainWindowView _mainView = new MainWindowView();
         private GlobalValues globalValues = ((App)Application.Current).GlobalValues;
         private ContextMenu mnuItems;
+
+        public MainWindowView MainView { get => _mainView; set => _mainView = value; }
 
         public MainWindow()
         {
@@ -35,17 +37,42 @@ namespace bestellung_wpf
             {
                 return;
             }
+            DataContext = MainView;
 
             InitializeComponent();
 
-            DataContext = view;
-            lstItems.ItemsSource = view.bestellungItemObservable.List;
+            SetBestellungStatusColor(BestellungStatus.Anfrage, MainView.AnfrageBackgroundBrush);
+            SetBestellungStatusColor(BestellungStatus.Bestellt, MainView.BestelltBackgroundBrush);
+            SetBestellungStatusColor(BestellungStatus.Liefert, MainView.LiefertBackgroundBrush);
+            SetBestellungStatusColor(BestellungStatus.Rueckgabe, MainView.RueckgabeBackgroundBrush);
+
+            lstItems.ItemsSource = MainView.bestellungItemObservable.List;
 
             GlobalValues_PropertyChanged(null, null);
             ((App)Application.Current).GlobalValues.PropertyChanged += GlobalValues_PropertyChanged;
 
             WindowHelper.Initialize(this);
 
+        }
+
+        private void SetBestellungStatusColor(BestellungStatus status, Brush brush)
+        {
+            DataTrigger dataTrigger = new DataTrigger();
+            dataTrigger.Binding = new Binding("status");
+            dataTrigger.Value = status;
+
+            Setter setter = new Setter(BackgroundProperty, brush);
+            dataTrigger.Setters.Add(setter);
+
+            if (lstItems.ItemContainerStyle == null)
+            {
+                lstItems.ItemContainerStyle = new Style();
+            }
+            if (lstItems.ItemContainerStyle.Triggers == null)
+            {
+                //lstItems.ItemContainerStyle.Triggers = new TriggerCollection();
+            }
+            lstItems.ItemContainerStyle.Triggers.Add(dataTrigger);
         }
 
         private void GlobalValues_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -71,13 +98,13 @@ namespace bestellung_wpf
 
         private void btnAnfrage_Click(object sender, RoutedEventArgs e)
         {
-            NewAnfrageForm form = new NewAnfrageForm(view, this);
+            NewAnfrageForm form = new NewAnfrageForm(MainView, this);
             form.ShowDialog();
 
             if (form.IsSelected) {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                view.InsertNewBestellung(form.BestellungItem);
+                MainView.InsertNewBestellung(form.BestellungItem);
             }
 
             
@@ -88,14 +115,14 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Bestellen);
+            BestellungChangeForm form = new BestellungChangeForm(MainView, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Bestellen);
             form.ShowDialog();
 
             if (form.IsSelected)
             {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                view.UpdateBestellung(form.BestellungItem);
+                MainView.UpdateBestellung(form.BestellungItem);
             }
         }
 
@@ -104,14 +131,14 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Liefern);
+            BestellungChangeForm form = new BestellungChangeForm(MainView, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Liefern);
             form.ShowDialog();
 
             if (form.IsSelected)
             {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                view.UpdateBestellung(form.BestellungItem);
+                MainView.UpdateBestellung(form.BestellungItem);
             }
 
         }
@@ -121,14 +148,14 @@ namespace bestellung_wpf
             Object o = mnuItems.Tag;
             BestellungItemUi item = (BestellungItemUi)o;
 
-            BestellungChangeForm form = new BestellungChangeForm(view, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Rueckgabe);
+            BestellungChangeForm form = new BestellungChangeForm(MainView, this, new BestellungItemUi(item.ToItem()), BestellungChangeType.Rueckgabe);
             form.ShowDialog();
 
             if (form.IsSelected)
             {
                 BestellungItemUi selcted = form.BestellungItem;
 
-                view.UpdateBestellung(form.BestellungItem);
+                MainView.UpdateBestellung(form.BestellungItem);
             }
 
         }
