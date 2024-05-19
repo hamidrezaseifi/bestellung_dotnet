@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:bestellung_wpf.forms"
         xmlns:utils="clr-namespace:bestellung_wpf.utils" x:Name="window"
         mc:Ignorable="d"
-        Title="{Binding BestellungView.Title, ElementName=window, Mode=OneWay}" Height="450" Width="910" WindowStartupLocation="CenterOwner" DataContext="{Binding BestellungView, RelativeSource={RelativeSource Self}}">
+        Title="{Binding BestellungView.Title, ElementName=window, Mode=OneWay}" Height="550" Width="910" WindowStartupLocation="CenterOwner" DataContext="{Binding BestellungView, RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <utils:DecimalValueConverter x:Key="DecimalValueConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid Margin="0,0,10,0">
             <Grid.ColumnDefinitions>
@@ -25,24 +28,24 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <utils:FilterComboBox x:Name="cmbCustomers" IsFiltered="True" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding BestellungView.CustomerList, ElementName=window}" Text="{Binding BestellungView.BestellungItem.customer, ElementName=window}" TabIndex="1" IsTextSearchEnabled="False" />
+            <utils:FilterComboBox x:Name="cmbCustomers" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" IsFiltered="True" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding BestellungView.CustomerList, ElementName=window}" Text="{Binding BestellungView.BestellungItem.customer, ElementName=window}" TabIndex="1" IsTextSearchEnabled="False" />
 
             <Label Content="Farhzeug" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-            <utils:FilterComboBox x:Name="cmbFahrzeug" IsFiltered="True" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding BestellungView.FahrzeugList, ElementName=window}" Text="{Binding BestellungView.BestellungItem.fahrzeug, ElementName=window}" TabIndex="2" IsTextSearchEnabled="False" />
+            <utils:FilterComboBox x:Name="cmbFahrzeug" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" IsFiltered="True" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding BestellungView.FahrzeugList, ElementName=window}" Text="{Binding BestellungView.BestellungItem.fahrzeug, ElementName=window}" TabIndex="2" IsTextSearchEnabled="False" />
             <Label Content="Fahrgestellnummer" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtFahrgestellnummer" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.fahrgestellnummer, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="3"/>
+            <utils:CustomeTextBox x:Name="txtFahrgestellnummer" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.fahrgestellnummer, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="3"/>
             <Label Content="HSN/TSN" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtHsnTsh" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.hsnTsn, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="4" />
+            <utils:CustomeTextBox x:Name="txtHsnTsh" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.hsnTsn, ElementName=window}" VerticalAlignment="Center" SelectOnFocus="True" TabIndex="4" />
             <Label Content="Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtBetrag" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.betrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="5" />
+            <utils:CustomeTextBox x:Name="txtBetrag" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.betrag, Converter={StaticResource DecimalValueConverter}, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="True" SelectOnFocus="True" TabIndex="5" />
             <Label Content="End-Betrag" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.endBetrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
+            <utils:CustomeTextBox x:Name="txtEndBetrag" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.endBetrag, Converter={StaticResource DecimalValueConverter}, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
             <Label Content="Anzahlung" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtAnzahlung" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.anzahlung, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
+            <utils:CustomeTextBox x:Name="txtAnzahlung" IsEnabled="{Binding BestellungView.ArticleIsEditable, ElementName=window, Mode=OneWay}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.anzahlung, Converter={StaticResource DecimalValueConverter}, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
             <Label Content="Öffene-Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" />
-            <utils:CustomeTextBox x:Name="txtOffeneBetrag" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" IsReadOnly="False" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.offeneBetrag, ElementName=window, IsAsync=True, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" />
+            <utils:CustomeTextBox x:Name="txtOffeneBetrag" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" IsReadOnly="False" TextWrapping="Wrap" Text="{Binding BestellungView.BestellungItem.offeneBetrag, ElementName=window, Mode=OneWay, StringFormat=\{0:F\}}" VerticalAlignment="Center" IsNumber="False" SelectOnFocus="True" TabIndex="6" IsEnabled="False" />
 
-            <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Bottom" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" Height="291" Grid.RowSpan="2" >
+            <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Grid.Row="3" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungView.BestellungItem.articles, ElementName=window, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="{Binding CanUserAddRow, Mode=TwoWay}" CanUserDeleteRows="True" >
                 <DataGrid.Columns>
 
                     <DataGridTemplateColumn Header="..." CanUserSort="False" CanUserReorder="False" Width="40">
@@ -109,7 +112,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="btnApply" Content="Anwenden" Grid.Column="5" HorizontalAlignment="Right" Grid.Row="3" VerticalAlignment="Center" Width="92" IsEnabled="{Binding BestellungView.BestellungItem.IsValid, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Click="btnApply_Click"/>
+            <Button x:Name="btnApply" Content="Anwenden" Grid.Column="5" HorizontalAlignment="Right" Grid.Row="4" VerticalAlignment="Center" Width="92" IsEnabled="{Binding BestellungView.BestellungItem.IsValid, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Click="btnApply_Click"/>
         </Grid>
 
     </Grid>

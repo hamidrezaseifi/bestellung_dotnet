@@ -1,0 +1,17 @@
+﻿<Window x:Name="window" x:Class="bestellung_wpf.forms.TestForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bestellung_wpf.forms"
+        mc:Ignorable="d"
+        Title="TestForm" Height="450" Width="800" DataContext="{Binding FormView, RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <TextBox x:Name="txtSource" Text="{Binding FormView.TestSourcetValue, ElementName=window}" HorizontalAlignment="Left" Height="23" Margin="181,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1"/>
+        <TextBox x:Name="txtTarget" Text="{Binding FormView.TestTargetValue, ElementName=window, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="181,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="3"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="63,47,0,0" VerticalAlignment="Top" Height="23" Width="85"/>
+        <Label Content="Targt" HorizontalAlignment="Left" Margin="63,122,0,0" VerticalAlignment="Top" Height="23" Width="85"/>
+        <TextBox x:Name="txtSource_Copy" Text="{Binding FormView.TestSourcetValue, ElementName=window}" HorizontalAlignment="Left" Height="23" Margin="396,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2"/>
+
+    </Grid>
+</Window>

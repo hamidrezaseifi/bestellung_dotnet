@@ -57,7 +57,13 @@ namespace bestellung_wpf.models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             IsValid = BestellungItemValidator.IsValid(this);
-            offeneBetrag = endBetrag - anzahlung;
+
+            if (propertyName.Equals("endBetrag") || propertyName.Equals("anzahlung"))
+            {
+                offeneBetrag = endBetrag - anzahlung;
+                NotifyPropertyChanged("offeneBetrag");
+            }
+            
         }
 
         internal bool HasLastEmpty()
@@ -130,6 +136,8 @@ namespace bestellung_wpf.models
             this._endBetrag = item.endBetrag;
             this._anzahlung = item.anzahlung;
             this._status = item.status;
+
+            this._offeneBetrag = endBetrag - anzahlung;
 
             _articles = new ObservableCollection<ArticleItemUi>();
             item.articles.ForEach(x => {

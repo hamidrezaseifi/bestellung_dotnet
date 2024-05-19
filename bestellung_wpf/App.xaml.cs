@@ -20,6 +20,11 @@ namespace bestellung_wpf
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            /*TestForm testForm = new TestForm();
+            testForm.ShowDialog();
+
+            this.Shutdown();*/
+
             SelectUserDialog dialog = new SelectUserDialog(null);
             Nullable<bool> dialogResult = dialog.ShowDialog();
             if (dialog.Selected)
@@ -31,7 +36,7 @@ namespace bestellung_wpf
                 this.Shutdown();
             }
 
-            
+
         }
     }
 }

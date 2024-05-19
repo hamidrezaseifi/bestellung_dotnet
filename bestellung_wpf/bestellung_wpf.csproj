@@ -127,6 +127,9 @@
     <Compile Include="forms\NewAnfrageForm.xaml.cs">
       <DependentUpon>NewAnfrageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="forms\TestForm.xaml.cs">
+      <DependentUpon>TestForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="forms\WindowBase.cs" />
     <Compile Include="models\ArticleItem.cs" />
     <Compile Include="models\ArticleItemUi.cs" />
@@ -134,11 +137,13 @@
     <Compile Include="models\IArticleItem.cs" />
     <Compile Include="models\ValidatorBase.cs" />
     <Compile Include="utils\CustomeTextBox.cs" />
+    <Compile Include="utils\DecimalValueConverter.cs" />
     <Compile Include="utils\FilterComboBox.cs" />
     <Compile Include="utils\GeneralUtils.cs" />
     <Compile Include="views\MainWindowView.cs" />
     <Compile Include="views\BestellungChangeView.cs" />
     <Compile Include="views\NewAnfrageView.cs" />
+    <Compile Include="views\TestFormView.cs" />
     <Page Include="forms\BestellungChangeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="forms\SelectUserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="forms\TestForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
