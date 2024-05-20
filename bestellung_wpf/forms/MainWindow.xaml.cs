@@ -51,6 +51,10 @@ namespace bestellung_wpf
             GlobalValues_PropertyChanged(null, null);
             ((App)Application.Current).GlobalValues.PropertyChanged += GlobalValues_PropertyChanged;
 
+            dtFrom.DisplayDateEnd = DateTime.Now;
+            
+            dtTo.DisplayDateEnd = DateTime.Now;
+            
             WindowHelper.Initialize(this);
 
         }
@@ -236,6 +240,56 @@ namespace bestellung_wpf
             if (item != null) {
                 ShowContextMenu(lstItems, item);
             }
+        }
+
+        private void tgbAll_Click(object sender, RoutedEventArgs e)
+        {
+            tgbAnfrage.IsChecked = false;
+            tgbBestellt.IsChecked = false;
+            tgbLiefert.IsChecked = false;
+            tgbRueckgabe.IsChecked = false;
+            _mainView.SetFilter(BestellungStatus.All);
+        }
+
+        private void tgbAnfrage_Click(object sender, RoutedEventArgs e)
+        {
+            tgbAll.IsChecked = false;
+            tgbBestellt.IsChecked = false;
+            tgbLiefert.IsChecked = false;
+            tgbRueckgabe.IsChecked = false;
+            _mainView.SetFilter(BestellungStatus.Anfrage);
+        }
+
+        private void tgbBestellt_Click(object sender, RoutedEventArgs e)
+        {
+            tgbAll.IsChecked = false;
+            tgbAnfrage.IsChecked = false;
+            tgbLiefert.IsChecked = false;
+            tgbRueckgabe.IsChecked = false;
+            _mainView.SetFilter(BestellungStatus.Bestellt);
+        }
+
+        private void tgbLiefert_Click(object sender, RoutedEventArgs e)
+        {
+            tgbAll.IsChecked = false;
+            tgbAnfrage.IsChecked = false;
+            tgbBestellt.IsChecked = false;
+            tgbRueckgabe.IsChecked = false;
+            _mainView.SetFilter(BestellungStatus.Liefert);
+        }
+
+        private void tgbRueckgabe_Click(object sender, RoutedEventArgs e)
+        {
+            tgbAll.IsChecked = false;
+            tgbAnfrage.IsChecked = false;
+            tgbBestellt.IsChecked = false;
+            tgbLiefert.IsChecked = false;
+            _mainView.SetFilter(BestellungStatus.Rueckgabe);
+        }
+
+        private void btnReload_Click(object sender, RoutedEventArgs e)
+        {
+            _mainView.ReloadData();
         }
     }
 }

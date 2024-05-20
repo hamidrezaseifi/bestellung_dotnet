@@ -1,4 +1,6 @@
-﻿using bestellung_wpf.models;
+﻿using bestellung_wpf.enums;
+using bestellung_wpf.models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -75,6 +77,22 @@ namespace bestellung_wpf.DataLayer
             SortDefinition<BestellungItem> sort = Builders<BestellungItem>.Sort.Descending(column);
 
             List<BestellungItem> items = this.GetAllDocuments(sort);
+
+            return items;
+        }
+
+        public List<BestellungItem> GetByStatusDocumentsSorted(BestellungStatus status, string column)
+        {
+            SortDefinition<BestellungItem> sort = Builders<BestellungItem>.Sort.Descending(column);
+
+            FilterDefinitionBuilder<BestellungItem> builder = Builders<BestellungItem>.Filter;
+            ObjectId oId = ObjectId.Empty;
+            FilterDefinition<BestellungItem> filter = builder.Gt(f => f._id, ObjectId.Empty);
+            if (status != BestellungStatus.All) {
+                filter = builder.Eq(f => f.status, status);
+            }
+
+            List<BestellungItem> items = this.GetFilteredDocuments(filter, sort);
 
             return items;
         }

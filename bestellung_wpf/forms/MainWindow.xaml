@@ -4,13 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bestellung_wpf"
-        xmlns:views="clr-namespace:bestellung_wpf.views" x:Name="window" x:Class="bestellung_wpf.MainWindow"
+        xmlns:views="clr-namespace:bestellung_wpf.views" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="950" Width="1900" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14" DataContext="{Binding MainView, ElementName=window}">
-    <Window.Resources>  
-
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,7 +22,7 @@
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="100"/>
@@ -34,7 +31,34 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="btnAnfrage" Content="Neue Anfrage" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Width="100" Height="30"  HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnAnfrage_Click" />
+            <Button x:Name="btnAnfrage" Content="Neue Anfrage" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Width="100" Height="30"  HorizontalAlignment="Right" Click="btnAnfrage_Click" />
+
+            <GroupBox Grid.Column="2" Grid.Row="0" >
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Margin" Value="5,0,10,0"/>
+                            <Setter Property="Width" Value="100"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label Content="Status:" VerticalAlignment="Center" Margin="50,0,10,0"/>
+
+                    <ToggleButton x:Name="tgbAll" Content="Alle" IsChecked="True" Click="tgbAll_Click"/>
+                    <ToggleButton x:Name="tgbAnfrage" Content="Anfrage" Background="{Binding MainView.AnfrageBackgroundBrush, ElementName=window, Mode=OneWay}" Click="tgbAnfrage_Click"/>
+                    <ToggleButton x:Name="tgbBestellt" Content="Bestellt" Background="{Binding MainView.BestelltBackgroundBrush, ElementName=window, Mode=OneWay}" Click="tgbBestellt_Click"/>
+                    <ToggleButton x:Name="tgbLiefert" Content="Liefert" Background="{Binding MainView.LiefertBackgroundBrush, ElementName=window, Mode=OneWay}" Click="tgbLiefert_Click"/>
+                    <ToggleButton x:Name="tgbRueckgabe" Content="Rückgabe" Background="{Binding MainView.RueckgabeBackgroundBrush, ElementName=window, Mode=OneWay}" Click="tgbRueckgabe_Click"/>
+
+                    <Label Content="Von:" VerticalAlignment="Center" Margin="50,0,10,0"/>
+                    <DatePicker x:Name="dtFrom" SelectedDate="{Binding MainView.FilterDateFrom, ElementName=window, Mode=TwoWay}" Width="110" VerticalAlignment="Center" />
+                    <Label Content="Bis:" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                    <DatePicker x:Name="dtTo" SelectedDate="{Binding MainView.FilterDateTo, ElementName=window, Mode=TwoWay}" Width="110" VerticalAlignment="Center" />
+                    <Label Content="durch:" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                    <ComboBox x:Name="cmbSortDateBy" Width="130" ItemsSource="{Binding MainView.FilterDateColumnList, ElementName=window, Mode=OneTime}" SelectedValue="{Binding MainView.FilterDateColumn, ElementName=window, Mode=OneTime}" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value"></ComboBox>
+                    <Button x:Name="btnReload" Content="Aktualisieren" Margin="10,0,10,0" Click="btnReload_Click"></Button>
+                </StackPanel>
+            </GroupBox>
             <Label x:Name="lblBenutzer" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Grid.Column="3" Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
             <Button x:Name="btnChangeUser" Content="Benutzer" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Width="85" Click="btnChangeUser_Click" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
@@ -60,14 +84,14 @@
                     <GridViewColumn Width="50" Header="..." x:Name="actionColumn">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="..." Width="35" Click="Button_Click" Tag="{Binding Mode=OneWay}" ></Button>
+                                <Button Content="..." Width="35" Click="Button_Click" Tag="{Binding Mode=OneWay}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
                 </GridView>
             </ListView.View>
-            
+
         </ListView>
 
     </Grid>

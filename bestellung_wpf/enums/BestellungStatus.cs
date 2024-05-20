@@ -8,6 +8,7 @@ namespace bestellung_wpf.enums
 {
     public enum BestellungStatus
     {
+        All,
         Anfrage,
         Bestellt,
         Liefert,
