@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bestellung_wpf"
         xmlns:views="clr-namespace:bestellung_wpf.views" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="bestellung_wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="1900" Closed="Window_Closed"
+        Title="Bestellung ..." Height="950" Width="1900" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" FontFamily="Tahoma" FontSize="14" DataContext="{Binding MainView, ElementName=window}">
     <Grid>
         <Grid.ColumnDefinitions>

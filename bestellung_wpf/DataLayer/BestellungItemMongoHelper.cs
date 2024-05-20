@@ -81,15 +81,15 @@ namespace bestellung_wpf.DataLayer
             return items;
         }
 
-        public List<BestellungItem> GetByStatusDocumentsSorted(BestellungStatus status, string column)
+        public List<BestellungItem> GetByStatusDocumentsSorted(BestellungStatus status, string column, DateTime from, DateTime to)
         {
             SortDefinition<BestellungItem> sort = Builders<BestellungItem>.Sort.Descending(column);
 
             FilterDefinitionBuilder<BestellungItem> builder = Builders<BestellungItem>.Filter;
             ObjectId oId = ObjectId.Empty;
-            FilterDefinition<BestellungItem> filter = builder.Gt(f => f._id, ObjectId.Empty);
+            FilterDefinition<BestellungItem> filter = builder.Gte(column, from) & builder.Lte(column, to);
             if (status != BestellungStatus.All) {
-                filter = builder.Eq(f => f.status, status);
+                filter = filter & builder.Eq(f => f.status, status);
             }
 
             List<BestellungItem> items = this.GetFilteredDocuments(filter, sort);

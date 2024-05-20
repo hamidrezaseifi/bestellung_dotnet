@@ -97,7 +97,7 @@ namespace bestellung_wpf.views
         }
 
         public void ReloadData() {
-            List<BestellungItem> documentList = bestellungItemMongoHlper.GetByStatusDocumentsSorted(_filterBy, _filterDateColumn);
+            List<BestellungItem> documentList = bestellungItemMongoHlper.GetByStatusDocumentsSorted(_filterBy, _filterDateColumn, _filterDateFrom, _filterDateTo);
             bestellungItemObservable.List.Clear();
             //_filterBy
             for (int i = 0; i < documentList.Count; i++)
