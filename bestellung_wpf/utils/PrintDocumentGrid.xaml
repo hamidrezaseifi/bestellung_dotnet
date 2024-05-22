@@ -1,0 +1,64 @@
+﻿<UserControl x:Name="userControl" x:Class="bestellung_wpf.utils.PrintDocumentGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:bestellung_wpf.utils"
+             mc:Ignorable="d" 
+             xmlns:utils="clr-namespace:bestellung_wpf.utils"
+             d:DesignHeight="450" d:DesignWidth="900" DataContext="{Binding BestellungItem, ElementName=userControl}">
+    <UserControl.Resources>
+        <utils:DecimalValueConverter x:Key="DecimalValueConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="0,0,10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Label Content="Kunde" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <Label x:Name="cmbCustomers" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Content="{Binding BestellungItem.customer, ElementName=userControl, ValidatesOnNotifyDataErrors=False}" TabIndex="1" />
+
+        <Label Content="Farhzeug" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+        <Label x:Name="cmbFahrzeug" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Content="{Binding BestellungItem.fahrzeug, ElementName=userControl}" TabIndex="2" />
+        <Label Content="Fahrgestellnummer" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" />
+        <Label x:Name="txtFahrgestellnummer" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.fahrgestellnummer, ElementName=userControl}" VerticalAlignment="Center" TabIndex="3"/>
+        <Label Content="HSN/TSN" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" />
+        <Label x:Name="txtHsnTsh" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.hsnTsn, ElementName=userControl}" VerticalAlignment="Center" TabIndex="4" />
+        <Label Content="Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
+        <Label x:Name="txtBetrag" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.betrag, ElementName=userControl, Converter={StaticResource DecimalValueConverter}, Mode=OneTime, StringFormat=\{0:F\}}" VerticalAlignment="Center" TabIndex="5" />
+        <Label Content="End-Betrag" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" />
+        <Label x:Name="txtEndBetrag" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.endBetrag, Converter={StaticResource DecimalValueConverter}, ElementName=userControl, Mode=OneTime, StringFormat=\{0:F\}}" VerticalAlignment="Center" TabIndex="6" />
+        <Label Content="Anzahlung" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+        <Label x:Name="txtAnzahlung" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.anzahlung, Converter={StaticResource DecimalValueConverter}, ElementName=userControl, Mode=OneTime, StringFormat=\{0:F\}}" VerticalAlignment="Center" TabIndex="6" />
+        <Label Content="Öffene-Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" />
+        <Label x:Name="txtOffeneBetrag" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.offeneBetrag, ElementName=userControl, Mode=OneWay, StringFormat=\{0:F\}}" VerticalAlignment="Center" TabIndex="6" IsEnabled="False" />
+
+        <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Grid.Row="3" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungItem.articles, ElementName=userControl, Mode=OneTime}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="..." Binding="{Binding index}" CanUserSort="False" CanUserReorder="False" IsReadOnly="True" Width="40" />
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="150" />
+                <DataGridTextColumn Header="Kauf-Quelle" Binding="{Binding purchaseSource}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="150" />
+                <DataGridTextColumn Header="Marke" Binding="{Binding manufacturer}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
+                <DataGridTextColumn Header="ArticleNumber" Binding="{Binding articleNumber}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="120" />
+                <DataGridTextColumn Header="Preis" Binding="{Binding price}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="80" />
+                <DataGridTextColumn Header="Status" Binding="{Binding status}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+
+
+</UserControl>

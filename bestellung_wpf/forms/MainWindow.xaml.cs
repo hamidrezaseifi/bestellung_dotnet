@@ -186,9 +186,11 @@ namespace bestellung_wpf
 
             mnuItems.Items.Clear();
 
+            MenuItem menuItem = null;
+
             if (item.status == BestellungStatus.Anfrage)
             {
-                MenuItem menuItem = new MenuItem();
+                menuItem = new MenuItem();
                 menuItem.Header = "Bestellen";
                 menuItem.Click += miBestellen_Click;
 
@@ -204,7 +206,7 @@ namespace bestellung_wpf
 
             if (item.status == BestellungStatus.Bestellt)
             {
-                MenuItem menuItem = new MenuItem();
+                menuItem = new MenuItem();
                 menuItem.Header = "Liefern";
                 menuItem.Click += miLiefern_Click;
 
@@ -213,16 +215,45 @@ namespace bestellung_wpf
 
             if (item.status == BestellungStatus.Liefert)
             {
-                MenuItem menuItem = new MenuItem();
+                menuItem = new MenuItem();
                 menuItem.Header = "Rückgabe";
                 menuItem.Click += miRueckgabe_Click;
 
                 mnuItems.Items.Add(menuItem);
             }
 
+            if (mnuItems.Items.Count > 0) {
+                mnuItems.Items.Add(new Separator());
+            }
+            
+
+            menuItem = new MenuItem();
+            menuItem.Header = "Drücken";
+            menuItem.Click += PrintItem_Click;
+
+            mnuItems.Items.Add(menuItem);
+
             mnuItems.PlacementTarget = ctrl;
             mnuItems.Tag = item;
             mnuItems.IsOpen = true; ;
+        }
+
+        private void PrintItem_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog dialog = new PrintDialog();
+            if (dialog.ShowDialog() != true)
+            { 
+                return;
+            }
+
+            Object o = mnuItems.Tag;
+            BestellungItemUi item = (BestellungItemUi)o;
+
+            PrintDocumentGrid printDocumentGrid = new PrintDocumentGrid(item);
+            dialog.PrintVisual(printDocumentGrid, "A Great Image.");
+
+            //TestPrintForm testPrintForm = new TestPrintForm(item);
+            //testPrintForm.ShowDialog();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

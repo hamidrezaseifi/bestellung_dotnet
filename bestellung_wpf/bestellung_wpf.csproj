@@ -150,6 +150,12 @@
     <Compile Include="utils\DecimalValueConverter.cs" />
     <Compile Include="utils\FilterComboBox.cs" />
     <Compile Include="utils\GeneralUtils.cs" />
+    <Compile Include="forms\TestPrintForm.xaml.cs">
+      <DependentUpon>TestPrintForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="utils\PrintDocumentGrid.xaml.cs">
+      <DependentUpon>PrintDocumentGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\MainWindowView.cs" />
     <Compile Include="views\BestellungChangeView.cs" />
     <Compile Include="views\NewAnfrageView.cs" />
@@ -189,6 +195,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="forms\TestPrintForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="utils\PrintDocumentGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\BestellungItem.cs" />
