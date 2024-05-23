@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:bestellung_wpf.utils"
              mc:Ignorable="d" 
              xmlns:utils="clr-namespace:bestellung_wpf.utils"
-             d:DesignHeight="450" d:DesignWidth="900" DataContext="{Binding BestellungItem, ElementName=userControl}">
+             d:DesignHeight="450" d:DesignWidth="900" DataContext="{Binding BestellungItem, ElementName=userControl}" FontFamily="Arial">
     <UserControl.Resources>
         <utils:DecimalValueConverter x:Key="DecimalValueConverter"/>
     </UserControl.Resources>
 
-    <Grid Margin="0,0,10,0">
+    <Grid Margin="10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
@@ -45,20 +45,31 @@
         <Label Content="Öffene-Betrag" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" />
         <Label x:Name="txtOffeneBetrag" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="23" Content="{Binding BestellungItem.offeneBetrag, ElementName=userControl, Mode=OneWay, StringFormat=\{0:F\}}" VerticalAlignment="Center" TabIndex="6" IsEnabled="False" />
 
-        <DataGrid x:Name="lstItems" HorizontalAlignment="Stretch" Grid.Row="3" Grid.ColumnSpan="6" TabIndex="7" ItemsSource="{Binding BestellungItem.articles, ElementName=userControl, Mode=OneTime}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="..." Binding="{Binding index}" CanUserSort="False" CanUserReorder="False" IsReadOnly="True" Width="40" />
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="150" />
-                <DataGridTextColumn Header="Kauf-Quelle" Binding="{Binding purchaseSource}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="150" />
-                <DataGridTextColumn Header="Marke" Binding="{Binding manufacturer}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
-                <DataGridTextColumn Header="ArticleNumber" Binding="{Binding articleNumber}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="120" />
-                <DataGridTextColumn Header="Preis" Binding="{Binding price}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="80" />
-                <DataGridTextColumn Header="Status" Binding="{Binding status}" IsReadOnly="True" CanUserSort="False" CanUserReorder="False" Width="100" />
+        <Grid x:Name="grdArticles" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                
+            </Grid.RowDefinitions>
 
-            </DataGrid.Columns>
-        </DataGrid>
+            <Label Grid.Column="0" Grid.Row="0" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,0,1" />
+            <Label Grid.Column="1" Grid.Row="0" Content="Name" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,0,1" />
+            <Label Grid.Column="2" Grid.Row="0" Content="Kauf-Quelle" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,0,1" />
+            <Label Grid.Column="3" Grid.Row="0" Content="Marke" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,0,1" />
+            <Label Grid.Column="4" Grid.Row="0" Content="Article-Number" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,0,1" />
+            <Label Grid.Column="5" Grid.Row="0" Content="Preis" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="1,1,1,1" />
+            <Label Grid.Column="6" Grid.Row="0" Content="Status" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#FFDCDBDB" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="#FF0A0A0A" BorderThickness="0,1,1,1" />
 
-    </Grid>
+        </Grid>
+     </Grid>
 
 
 </UserControl>
